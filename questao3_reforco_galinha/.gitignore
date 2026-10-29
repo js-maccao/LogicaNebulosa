@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+
+# Cópia antiga do gráfico (o atual fica em resultados/)
+/curva_aprendizado.png
+.pytest_cache/

@@ -1,0 +1,201 @@
+caminho,grupo,rotulo,P_cachorro_knn,mu_não_cachorro_knn,mu_incerto_knn,mu_cachorro_knn,termo_knn,P_cachorro_random_forest,mu_não_cachorro_random_forest,mu_incerto_random_forest,mu_cachorro_random_forest,termo_random_forest,P_cachorro_svm_atributos,mu_não_cachorro_svm_atributos,mu_incerto_svm_atributos,mu_cachorro_svm_atributos,termo_svm_atributos
+BaseCachorro/n02085620-Chihuahua/n02085620_10976.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.61,0.0,0.56,0.44,incerto,0.6220713483101625,0.0,0.5117,0.4883,incerto
+BaseCachorro/n02085936-Maltese_dog/n02085936_10377.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.7,0.0,0.2,0.8,cachorro,0.4718246218534319,0.1127,0.8873,0.0,incerto
+BaseCachorro/n02086240-Shih-Tzu/n02086240_1016.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.61,0.0,0.56,0.44,incerto,0.6537990364007881,0.0,0.3848,0.6152,cachorro
+BaseCachorro/n02086240-Shih-Tzu/n02086240_1078.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.61,0.0,0.56,0.44,incerto,0.547757604628695,0.0,0.809,0.191,incerto
+BaseCachorro/n02086910-papillon/n02086910_1659.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.51,0.0,0.96,0.04,incerto,0.6291025440227783,0.0,0.4836,0.5164,cachorro
+BaseCachorro/n02087394-Rhodesian_ridgeback/n02087394_10418.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.71,0.0,0.16,0.84,cachorro,0.3381022108355802,0.6476,0.3524,0.0,não cachorro
+BaseCachorro/n02088094-Afghan_hound/n02088094_10263.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.61,0.0,0.56,0.44,incerto,0.4962592481176706,0.015,0.985,0.0,incerto
+BaseCachorro/n02088094-Afghan_hound/n02088094_10832.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.67,0.0,0.32,0.68,cachorro,0.3306333192026423,0.6775,0.3225,0.0,não cachorro
+BaseCachorro/n02088238-basset/n02088238_10013.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.65,0.0,0.4,0.6,cachorro,0.5136579868620046,0.0,0.9454,0.0546,incerto
+BaseCachorro/n02088238-basset/n02088238_10049.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.62,0.0,0.52,0.48,incerto,0.5581149337879869,0.0,0.7675,0.2325,incerto
+BaseCachorro/n02088238-basset/n02088238_10054.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.58,0.0,0.68,0.32,incerto,0.6766410775945909,0.0,0.2934,0.7066,cachorro
+BaseCachorro/n02088238-basset/n02088238_10072.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.65,0.0,0.4,0.6,cachorro,0.5386628945665081,0.0,0.8453,0.1547,incerto
+BaseCachorro/n02088364-beagle/n02088364_10731.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.47,0.12,0.88,0.0,incerto,0.452198067754035,0.1912,0.8088,0.0,incerto
+BaseCachorro/n02089078-black-and-tan_coonhound/n02089078_1025.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.38,0.48,0.52,0.0,incerto,0.552217540608404,0.0,0.7911,0.2089,incerto
+BaseCachorro/n02089973-English_foxhound/n02089973_1066.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.62,0.0,0.52,0.48,incerto,0.6272881603819087,0.0,0.4908,0.5092,cachorro
+BaseCachorro/n02090379-redbone/n02090379_1272.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.58,0.0,0.68,0.32,incerto,0.573497094995529,0.0,0.706,0.294,incerto
+BaseCachorro/n02090379-redbone/n02090379_1292.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.58,0.0,0.68,0.32,incerto,0.5627363564016445,0.0,0.7491,0.2509,incerto
+BaseCachorro/n02090622-borzoi/n02090622_10355.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.6,0.0,0.6,0.4,incerto,0.7118052900706453,0.0,0.1528,0.8472,cachorro
+BaseCachorro/n02090721-Irish_wolfhound/n02090721_1222.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.53,0.0,0.88,0.12,incerto,0.6855574365125919,0.0,0.2578,0.7422,cachorro
+BaseCachorro/n02091032-Italian_greyhound/n02091032_1034.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.67,0.0,0.32,0.68,cachorro,0.649440716368198,0.0,0.4022,0.5978,cachorro
+BaseCachorro/n02091134-whippet/n02091134_10395.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.39,0.44,0.56,0.0,incerto,0.4101616900160236,0.3594,0.6406,0.0,incerto
+BaseCachorro/n02091134-whippet/n02091134_10545.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.56,0.0,0.76,0.24,incerto,0.5441107487776597,0.0,0.8236,0.1764,incerto
+BaseCachorro/n02091831-Saluki/n02091831_10576.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.46,0.16,0.84,0.0,incerto,0.5799785823557684,0.0,0.6801,0.3199,incerto
+BaseCachorro/n02092339-Weimaraner/n02092339_1100.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.6,0.0,0.6,0.4,incerto,0.4802623618632725,0.079,0.921,0.0,incerto
+BaseCachorro/n02093256-Staffordshire_bullterrier/n02093256_11569.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.65,0.0,0.4,0.6,cachorro,0.4966766633955323,0.0133,0.9867,0.0,incerto
+BaseCachorro/n02093859-Kerry_blue_terrier/n02093859_1169.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.54,0.0,0.84,0.16,incerto,0.6421858176357331,0.0,0.4313,0.5687,cachorro
+BaseCachorro/n02093859-Kerry_blue_terrier/n02093859_1213.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.39,0.44,0.56,0.0,incerto,0.3675229324470858,0.5299,0.4701,0.0,não cachorro
+BaseCachorro/n02094258-Norwich_terrier/n02094258_1004.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.48,0.08,0.92,0.0,incerto,0.4539842073709649,0.1841,0.8159,0.0,incerto
+BaseCachorro/n02094258-Norwich_terrier/n02094258_103.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.52,0.0,0.92,0.08,incerto,0.4259249557232337,0.2963,0.7037,0.0,incerto
+BaseCachorro/n02094433-Yorkshire_terrier/n02094433_1030.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.45,0.2,0.8,0.0,incerto,0.4771920379660629,0.0912,0.9088,0.0,incerto
+BaseCachorro/n02095314-wire-haired_fox_terrier/n02095314_1104.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.66,0.0,0.36,0.64,cachorro,0.6317748147916543,0.0,0.4729,0.5271,cachorro
+BaseCachorro/n02095570-Lakeland_terrier/n02095570_1068.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.49,0.04,0.96,0.0,incerto,0.6827241914874758,0.0,0.2691,0.7309,cachorro
+BaseCachorro/n02096177-cairn/n02096177_11224.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.58,0.0,0.68,0.32,incerto,0.7236672206864518,0.0,0.1053,0.8947,cachorro
+BaseCachorro/n02096294-Australian_terrier/n02096294_1121.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.48,0.08,0.92,0.0,incerto,0.5879452341650743,0.0,0.6482,0.3518,incerto
+BaseCachorro/n02096294-Australian_terrier/n02096294_1150.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.57,0.0,0.72,0.28,incerto,0.3372573190041901,0.651,0.349,0.0,não cachorro
+BaseCachorro/n02096294-Australian_terrier/n02096294_1231.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.51,0.0,0.96,0.04,incerto,0.4751200939219507,0.0995,0.9005,0.0,incerto
+BaseCachorro/n02096294-Australian_terrier/n02096294_1284.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.7,0.0,0.2,0.8,cachorro,0.5174643423796852,0.0,0.9301,0.0699,incerto
+BaseCachorro/n02097047-miniature_schnauzer/n02097047_1115.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.35,0.6,0.4,0.0,não cachorro,0.6189541173729699,0.0,0.5242,0.4758,incerto
+BaseCachorro/n02097130-giant_schnauzer/n02097130_1159.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.35,0.6,0.4,0.0,não cachorro,0.6168501096485345,0.0,0.5326,0.4674,incerto
+BaseCachorro/n02097298-Scotch_terrier/n02097298_1007.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.48,0.08,0.92,0.0,incerto,0.7321348676405813,0.0,0.0715,0.9285,cachorro
+BaseCachorro/n02097298-Scotch_terrier/n02097298_13186.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.47,0.12,0.88,0.0,incerto,0.4646459652238358,0.1414,0.8586,0.0,incerto
+BaseCachorro/n02097474-Tibetan_terrier/n02097474_1156.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.62,0.0,0.52,0.48,incerto,0.7202433448876026,0.0,0.119,0.881,cachorro
+BaseCachorro/n02098413-Lhasa/n02098413_1279.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.59,0.0,0.64,0.36,incerto,0.3925342458996512,0.4299,0.5701,0.0,incerto
+BaseCachorro/n02099429-curly-coated_retriever/n02099429_1068.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.48,0.08,0.92,0.0,incerto,0.6180113646152754,0.0,0.528,0.472,incerto
+BaseCachorro/n02099429-curly-coated_retriever/n02099429_120.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.26,0.96,0.04,0.0,não cachorro,0.6019100907284287,0.0,0.5924,0.4076,incerto
+BaseCachorro/n02099712-Labrador_retriever/n02099712_2115.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.41,0.36,0.64,0.0,incerto,0.3187062866120162,0.7252,0.2748,0.0,não cachorro
+BaseCachorro/n02099849-Chesapeake_Bay_retriever/n02099849_1024.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.4,0.4,0.6,0.0,incerto,0.6179614326479084,0.0,0.5282,0.4718,incerto
+BaseCachorro/n02100236-German_short-haired_pointer/n02100236_1329.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.69,0.0,0.24,0.76,cachorro,0.7079609117900935,0.0,0.1682,0.8318,cachorro
+BaseCachorro/n02100236-German_short-haired_pointer/n02100236_1443.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.34,0.64,0.36,0.0,não cachorro,0.4962030249967837,0.0152,0.9848,0.0,incerto
+BaseCachorro/n02100583-vizsla/n02100583_10388.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.47,0.12,0.88,0.0,incerto,0.5649552816746471,0.0,0.7402,0.2598,incerto
+BaseCachorro/n02100735-English_setter/n02100735_10038.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.62,0.0,0.52,0.48,incerto,0.4296889416047788,0.2812,0.7188,0.0,incerto
+BaseCachorro/n02100877-Irish_setter/n02100877_1061.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.63,0.0,0.48,0.52,cachorro,0.2479342229581381,1.0,0.0,0.0,não cachorro
+BaseCachorro/n02100877-Irish_setter/n02100877_1069.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.32,0.72,0.28,0.0,não cachorro,0.5102160565771654,0.0,0.9591,0.0409,incerto
+BaseCachorro/n02101006-Gordon_setter/n02101006_1126.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.53,0.0,0.88,0.12,incerto,0.5479518881251727,0.0,0.8082,0.1918,incerto
+BaseCachorro/n02101388-Brittany_spaniel/n02101388_10107.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.54,0.0,0.84,0.16,incerto,0.3858649991558191,0.4565,0.5435,0.0,incerto
+BaseCachorro/n02102318-cocker_spaniel/n02102318_10020.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.33,0.68,0.32,0.0,não cachorro,0.4071073773542486,0.3716,0.6284,0.0,incerto
+BaseCachorro/n02102318-cocker_spaniel/n02102318_10162.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.42,0.32,0.68,0.0,incerto,0.6394408402595908,0.0,0.4422,0.5578,cachorro
+BaseCachorro/n02102973-Irish_water_spaniel/n02102973_1254.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.5,0.0,1.0,0.0,incerto,0.433547500974156,0.2658,0.7342,0.0,incerto
+BaseCachorro/n02104029-kuvasz/n02104029_1138.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.56,0.0,0.76,0.24,incerto,0.5417640981750539,0.0,0.8329,0.1671,incerto
+BaseCachorro/n02104365-schipperke/n02104365_10071.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.51,0.0,0.96,0.04,incerto,0.6358282722703147,0.0,0.4567,0.5433,cachorro
+BaseCachorro/n02104365-schipperke/n02104365_10319.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.48,0.08,0.92,0.0,incerto,0.5859494993941964,0.0,0.6562,0.3438,incerto
+BaseCachorro/n02105056-groenendael/n02105056_1067.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.58,0.0,0.68,0.32,incerto,0.4907131367402315,0.0371,0.9629,0.0,incerto
+BaseCachorro/n02105056-groenendael/n02105056_1294.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.23,1.0,0.0,0.0,não cachorro,0.4669909403679559,0.132,0.868,0.0,incerto
+BaseCachorro/n02105162-malinois/n02105162_175.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.62,0.0,0.52,0.48,incerto,0.4818058916337586,0.0728,0.9272,0.0,incerto
+BaseCachorro/n02105505-komondor/n02105505_1018.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.73,0.0,0.08,0.92,cachorro,0.4105122720421409,0.358,0.642,0.0,incerto
+BaseCachorro/n02105505-komondor/n02105505_1090.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.41,0.36,0.64,0.0,incerto,0.6933194016730472,0.0,0.2267,0.7733,cachorro
+BaseCachorro/n02105855-Shetland_sheepdog/n02105855_11668.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.44,0.24,0.76,0.0,incerto,0.428856139908401,0.2846,0.7154,0.0,incerto
+BaseCachorro/n02106030-collie/n02106030_10377.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.71,0.0,0.16,0.84,cachorro,0.4955497867143722,0.0178,0.9822,0.0,incerto
+BaseCachorro/n02106166-Border_collie/n02106166_1031.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.61,0.0,0.56,0.44,incerto,0.5397603945782479,0.0,0.841,0.159,incerto
+BaseCachorro/n02106166-Border_collie/n02106166_1032.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.66,0.0,0.36,0.64,cachorro,0.6961680948272004,0.0,0.2153,0.7847,cachorro
+BaseCachorro/n02106382-Bouvier_des_Flandres/n02106382_1005.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.64,0.0,0.44,0.56,cachorro,0.5080783054886883,0.0,0.9677,0.0323,incerto
+BaseCachorro/n02106382-Bouvier_des_Flandres/n02106382_1048.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.37,0.52,0.48,0.0,não cachorro,0.5262737775810189,0.0,0.8949,0.1051,incerto
+BaseCachorro/n02106662-German_shepherd/n02106662_10552.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.57,0.0,0.72,0.28,incerto,0.6332632877247155,0.0,0.4669,0.5331,cachorro
+BaseCachorro/n02107142-Doberman/n02107142_1073.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.63,0.0,0.48,0.52,cachorro,0.5363211615865524,0.0,0.8547,0.1453,incerto
+BaseCachorro/n02107312-miniature_pinscher/n02107312_1207.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.59,0.0,0.64,0.36,incerto,0.7033728664100253,0.0,0.1865,0.8135,cachorro
+BaseCachorro/n02107683-Bernese_mountain_dog/n02107683_1175.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.59,0.0,0.64,0.36,incerto,0.4580853849333646,0.1677,0.8323,0.0,incerto
+BaseCachorro/n02108089-boxer/n02108089_1003.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.36,0.56,0.44,0.0,não cachorro,0.4318556437580663,0.2726,0.7274,0.0,incerto
+BaseCachorro/n02108089-boxer/n02108089_1072.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.72,0.0,0.12,0.88,cachorro,0.5979242902641064,0.0,0.6083,0.3917,incerto
+BaseCachorro/n02108422-bull_mastiff/n02108422_1016.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.37,0.52,0.48,0.0,não cachorro,0.5465225152520402,0.0,0.8139,0.1861,incerto
+BaseCachorro/n02109047-Great_Dane/n02109047_11178.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.67,0.0,0.32,0.68,cachorro,0.6005911759530065,0.0,0.5976,0.4024,incerto
+BaseCachorro/n02110063-malamute/n02110063_10751.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.67,0.0,0.32,0.68,cachorro,0.4305459424934386,0.2778,0.7222,0.0,incerto
+BaseCachorro/n02110185-Siberian_husky/n02110185_1066.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.51,0.0,0.96,0.04,incerto,0.4849100725439741,0.0604,0.9396,0.0,incerto
+BaseCachorro/n02110806-basenji/n02110806_111.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.41,0.36,0.64,0.0,incerto,0.4594449670618939,0.1622,0.8378,0.0,incerto
+BaseCachorro/n02111129-Leonberg/n02111129_1115.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.56,0.0,0.76,0.24,incerto,0.5920740157471384,0.0,0.6317,0.3683,incerto
+BaseCachorro/n02111500-Great_Pyrenees/n02111500_109.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.48,0.08,0.92,0.0,incerto,0.370825871614353,0.5167,0.4833,0.0,não cachorro
+BaseCachorro/n02111500-Great_Pyrenees/n02111500_1149.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.72,0.0,0.12,0.88,cachorro,0.6351143901948967,0.0,0.4595,0.5405,cachorro
+BaseCachorro/n02111889-Samoyed/n02111889_10734.jpg,cachorro,1,0.2,1.0,0.0,0.0,não cachorro,0.3,0.8,0.2,0.0,não cachorro,0.3135957518257318,0.7456,0.2544,0.0,não cachorro
+BaseCachorro/n02112350-keeshond/n02112350_10079.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.72,0.0,0.12,0.88,cachorro,0.639381512819115,0.0,0.4425,0.5575,cachorro
+BaseCachorro/n02112350-keeshond/n02112350_10100.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.6,0.0,0.6,0.4,incerto,0.6078631263522534,0.0,0.5685,0.4315,incerto
+BaseCachorro/n02112350-keeshond/n02112350_10128.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.53,0.0,0.88,0.12,incerto,0.6910748063038473,0.0,0.2357,0.7643,cachorro
+BaseCachorro/n02112350-keeshond/n02112350_10254.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.71,0.0,0.16,0.84,cachorro,0.3986138456608326,0.4055,0.5945,0.0,incerto
+BaseCachorro/n02113023-Pembroke/n02113023_11103.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.62,0.0,0.52,0.48,incerto,0.720268248607416,0.0,0.1189,0.8811,cachorro
+BaseCachorro/n02113624-toy_poodle/n02113624_1023.jpg,cachorro,1,0.4,0.4,0.6,0.0,incerto,0.5,0.0,1.0,0.0,incerto,0.4543095741359748,0.1828,0.8172,0.0,incerto
+BaseCachorro/n02113799-standard_poodle/n02113799_1057.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.55,0.0,0.8,0.2,incerto,0.6841633602407712,0.0,0.2633,0.7367,cachorro
+BaseCachorro/n02113799-standard_poodle/n02113799_1328.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.48,0.08,0.92,0.0,incerto,0.5468888384269601,0.0,0.8124,0.1876,incerto
+BaseCachorro/n02113978-Mexican_hairless/n02113978_1088.jpg,cachorro,1,1.0,0.0,0.0,1.0,cachorro,0.51,0.0,0.96,0.04,incerto,0.3798282365426948,0.4807,0.5193,0.0,incerto
+BaseCachorro/n02115641-dingo/n02115641_10021.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.61,0.0,0.56,0.44,incerto,0.4666980977594603,0.1332,0.8668,0.0,incerto
+BaseCachorro/n02115913-dhole/n02115913_1010.jpg,cachorro,1,0.6,0.0,0.6,0.4,incerto,0.59,0.0,0.64,0.36,incerto,0.3610867705138471,0.5557,0.4443,0.0,não cachorro
+BaseCachorro/n02116738-African_hunting_dog/n02116738_10081.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.29,0.84,0.16,0.0,não cachorro,0.5496155118228941,0.0,0.8015,0.1985,incerto
+BaseCachorro/n02116738-African_hunting_dog/n02116738_10469.jpg,cachorro,1,0.8,0.0,0.0,1.0,cachorro,0.47,0.12,0.88,0.0,incerto,0.3557932989225202,0.5768,0.4232,0.0,não cachorro
+BaseNãoCachorros/cat_0002.jpeg,cat,0,0.0,1.0,0.0,0.0,não cachorro,0.23,1.0,0.0,0.0,não cachorro,0.359721021686322,0.5611,0.4389,0.0,não cachorro
+BaseNãoCachorros/cat_0004.jpeg,cat,0,0.2,1.0,0.0,0.0,não cachorro,0.44,0.24,0.76,0.0,incerto,0.3761313268493514,0.4955,0.5045,0.0,incerto
+BaseNãoCachorros/cat_0009.jpeg,cat,0,0.4,0.4,0.6,0.0,incerto,0.44,0.24,0.76,0.0,incerto,0.4729939123977629,0.108,0.892,0.0,incerto
+BaseNãoCachorros/cat_0141.jpeg,cat,0,0.8,0.0,0.0,1.0,cachorro,0.43,0.28,0.72,0.0,incerto,0.4930360145368279,0.0279,0.9721,0.0,incerto
+BaseNãoCachorros/cat_0183.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.62,0.0,0.52,0.48,incerto,0.3294253138296111,0.6823,0.3177,0.0,não cachorro
+BaseNãoCachorros/cat_0210.jpeg,cat,0,0.0,1.0,0.0,0.0,não cachorro,0.53,0.0,0.88,0.12,incerto,0.3458182080336752,0.6167,0.3833,0.0,não cachorro
+BaseNãoCachorros/cat_0327.jpeg,cat,0,0.4,0.4,0.6,0.0,incerto,0.76,0.0,0.0,1.0,cachorro,0.5359518342244355,0.0,0.8562,0.1438,incerto
+BaseNãoCachorros/cat_0390.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.44,0.24,0.76,0.0,incerto,0.5012059867639823,0.0,0.9952,0.0048,incerto
+BaseNãoCachorros/cat_0401.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.49,0.04,0.96,0.0,incerto,0.6415056843928527,0.0,0.434,0.566,cachorro
+BaseNãoCachorros/cat_0436.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.52,0.0,0.92,0.08,incerto,0.5503026324314155,0.0,0.7988,0.2012,incerto
+BaseNãoCachorros/cat_0631.jpeg,cat,0,0.4,0.4,0.6,0.0,incerto,0.45,0.2,0.8,0.0,incerto,0.7099815818428615,0.0,0.1601,0.8399,cachorro
+BaseNãoCachorros/cat_0643.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.29,0.84,0.16,0.0,não cachorro,0.5833691147142794,0.0,0.6665,0.3335,incerto
+BaseNãoCachorros/cat_0697.jpeg,cat,0,0.2,1.0,0.0,0.0,não cachorro,0.48,0.08,0.92,0.0,incerto,0.5221582506881276,0.0,0.9114,0.0886,incerto
+BaseNãoCachorros/cat_0757.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.59,0.0,0.64,0.36,incerto,0.7011112909017554,0.0,0.1956,0.8044,cachorro
+BaseNãoCachorros/cat_0825.jpeg,cat,0,0.8,0.0,0.0,1.0,cachorro,0.3,0.8,0.2,0.0,não cachorro,0.308219482726222,0.7671,0.2329,0.0,não cachorro
+BaseNãoCachorros/cat_0941.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.51,0.0,0.96,0.04,incerto,0.6425354642060229,0.0,0.4299,0.5701,cachorro
+BaseNãoCachorros/cat_0985.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.5,0.0,1.0,0.0,incerto,0.419994660550962,0.32,0.68,0.0,incerto
+BaseNãoCachorros/cat_1020.jpeg,cat,0,0.8,0.0,0.0,1.0,cachorro,0.75,0.0,0.0,1.0,cachorro,0.4264926020969968,0.294,0.706,0.0,incerto
+BaseNãoCachorros/cat_1134.jpeg,cat,0,0.6,0.0,0.6,0.4,incerto,0.65,0.0,0.4,0.6,cachorro,0.568578614713089,0.0,0.7257,0.2743,incerto
+BaseNãoCachorros/cat_1179.jpeg,cat,0,0.0,1.0,0.0,0.0,não cachorro,0.29,0.84,0.16,0.0,não cachorro,0.2661731098657777,0.9353,0.0647,0.0,não cachorro
+BaseNãoCachorros/chicken_0052.jpeg,chicken,0,1.0,0.0,0.0,1.0,cachorro,0.49,0.04,0.96,0.0,incerto,0.4501194332540167,0.1995,0.8005,0.0,incerto
+BaseNãoCachorros/chicken_0220.jpeg,chicken,0,0.2,1.0,0.0,0.0,não cachorro,0.41,0.36,0.64,0.0,incerto,0.6472068655764601,0.0,0.4112,0.5888,cachorro
+BaseNãoCachorros/chicken_0381.jpeg,chicken,0,0.2,1.0,0.0,0.0,não cachorro,0.21,1.0,0.0,0.0,não cachorro,0.3735965115177249,0.5056,0.4944,0.0,não cachorro
+BaseNãoCachorros/chicken_0445.jpeg,chicken,0,0.6,0.0,0.6,0.4,incerto,0.49,0.04,0.96,0.0,incerto,0.2749707398679956,0.9001,0.0999,0.0,não cachorro
+BaseNãoCachorros/chicken_0494.jpeg,chicken,0,0.6,0.0,0.6,0.4,incerto,0.39,0.44,0.56,0.0,incerto,0.3271833924620212,0.6913,0.3087,0.0,não cachorro
+BaseNãoCachorros/chicken_0500.jpeg,chicken,0,0.4,0.4,0.6,0.0,incerto,0.43,0.28,0.72,0.0,incerto,0.5575319755266012,0.0,0.7699,0.2301,incerto
+BaseNãoCachorros/chicken_0592.jpeg,chicken,0,0.6,0.0,0.6,0.4,incerto,0.58,0.0,0.68,0.32,incerto,0.3702210314297494,0.5191,0.4809,0.0,não cachorro
+BaseNãoCachorros/chicken_0937.jpeg,chicken,0,1.0,0.0,0.0,1.0,cachorro,0.57,0.0,0.72,0.28,incerto,0.2734131760262918,0.9063,0.0937,0.0,não cachorro
+BaseNãoCachorros/chicken_1064.jpeg,chicken,0,0.8,0.0,0.0,1.0,cachorro,0.59,0.0,0.64,0.36,incerto,0.5850741432285487,0.0,0.6597,0.3403,incerto
+BaseNãoCachorros/chicken_1084.jpeg,chicken,0,0.4,0.4,0.6,0.0,incerto,0.23,1.0,0.0,0.0,não cachorro,0.4793710600918698,0.0825,0.9175,0.0,incerto
+BaseNãoCachorros/chicken_1525.jpeg,chicken,0,0.0,1.0,0.0,0.0,não cachorro,0.34,0.64,0.36,0.0,não cachorro,0.4648309777713283,0.1407,0.8593,0.0,incerto
+BaseNãoCachorros/chicken_1696.jpeg,chicken,0,0.4,0.4,0.6,0.0,incerto,0.35,0.6,0.4,0.0,não cachorro,0.1752709173444811,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/chicken_1708.jpeg,chicken,0,0.8,0.0,0.0,1.0,cachorro,0.54,0.0,0.84,0.16,incerto,0.4011935875619514,0.3952,0.6048,0.0,incerto
+BaseNãoCachorros/chicken_2436.jpeg,chicken,0,1.0,0.0,0.0,1.0,cachorro,0.51,0.0,0.96,0.04,incerto,0.5492072062530117,0.0,0.8032,0.1968,incerto
+BaseNãoCachorros/chicken_2449.jpeg,chicken,0,0.8,0.0,0.0,1.0,cachorro,0.63,0.0,0.48,0.52,cachorro,0.4400315143356164,0.2399,0.7601,0.0,incerto
+BaseNãoCachorros/chicken_2494.jpeg,chicken,0,0.6,0.0,0.6,0.4,incerto,0.66,0.0,0.36,0.64,cachorro,0.5687078764544169,0.0,0.7252,0.2748,incerto
+BaseNãoCachorros/chicken_2797.jpeg,chicken,0,0.8,0.0,0.0,1.0,cachorro,0.65,0.0,0.4,0.6,cachorro,0.4713697491829485,0.1145,0.8855,0.0,incerto
+BaseNãoCachorros/chicken_3015.jpeg,chicken,0,0.4,0.4,0.6,0.0,incerto,0.61,0.0,0.56,0.44,incerto,0.4845777683654865,0.0617,0.9383,0.0,incerto
+BaseNãoCachorros/chicken_3042.jpeg,chicken,0,0.4,0.4,0.6,0.0,incerto,0.41,0.36,0.64,0.0,incerto,0.5386480972366956,0.0,0.8454,0.1546,incerto
+BaseNãoCachorros/chicken_3088.jpeg,chicken,0,0.6,0.0,0.6,0.4,incerto,0.35,0.6,0.4,0.0,não cachorro,0.7373351412925304,0.0,0.0507,0.9493,cachorro
+BaseNãoCachorros/cow_0158.jpeg,cow,0,0.4,0.4,0.6,0.0,incerto,0.49,0.04,0.96,0.0,incerto,0.3395983014562204,0.6416,0.3584,0.0,não cachorro
+BaseNãoCachorros/cow_0322.jpeg,cow,0,0.2,1.0,0.0,0.0,não cachorro,0.58,0.0,0.68,0.32,incerto,0.4589154566594921,0.1643,0.8357,0.0,incerto
+BaseNãoCachorros/cow_0335.jpeg,cow,0,0.4,0.4,0.6,0.0,incerto,0.42,0.32,0.68,0.0,incerto,0.2244934305876002,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/cow_0462.jpeg,cow,0,0.6,0.0,0.6,0.4,incerto,0.5,0.0,1.0,0.0,incerto,0.3646615077238426,0.5414,0.4586,0.0,não cachorro
+BaseNãoCachorros/cow_0489.jpeg,cow,0,0.6,0.0,0.6,0.4,incerto,0.34,0.64,0.36,0.0,não cachorro,0.5609640641248832,0.0,0.7561,0.2439,incerto
+BaseNãoCachorros/cow_0517.jpeg,cow,0,0.8,0.0,0.0,1.0,cachorro,0.53,0.0,0.88,0.12,incerto,0.2946912644362535,0.8212,0.1788,0.0,não cachorro
+BaseNãoCachorros/cow_0674.jpeg,cow,0,0.6,0.0,0.6,0.4,incerto,0.44,0.24,0.76,0.0,incerto,0.2550145563067181,0.9799,0.0201,0.0,não cachorro
+BaseNãoCachorros/cow_0706.jpeg,cow,0,0.8,0.0,0.0,1.0,cachorro,0.46,0.16,0.84,0.0,incerto,0.3233887433226947,0.7064,0.2936,0.0,não cachorro
+BaseNãoCachorros/cow_0854.jpeg,cow,0,0.6,0.0,0.6,0.4,incerto,0.48,0.08,0.92,0.0,incerto,0.5081992879984764,0.0,0.9672,0.0328,incerto
+BaseNãoCachorros/cow_1023.jpeg,cow,0,0.2,1.0,0.0,0.0,não cachorro,0.34,0.64,0.36,0.0,não cachorro,0.3082004502596188,0.7672,0.2328,0.0,não cachorro
+BaseNãoCachorros/cow_1071.jpeg,cow,0,0.6,0.0,0.6,0.4,incerto,0.5,0.0,1.0,0.0,incerto,0.206960594515759,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/cow_1132.jpeg,cow,0,0.6,0.0,0.6,0.4,incerto,0.24,1.0,0.0,0.0,não cachorro,0.2290200063517033,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/cow_1134.jpeg,cow,0,0.8,0.0,0.0,1.0,cachorro,0.44,0.24,0.76,0.0,incerto,0.3706297225481174,0.5175,0.4825,0.0,não cachorro
+BaseNãoCachorros/cow_1308.jpeg,cow,0,1.0,0.0,0.0,1.0,cachorro,0.28,0.88,0.12,0.0,não cachorro,0.4613877766625153,0.1544,0.8456,0.0,incerto
+BaseNãoCachorros/cow_1341.jpeg,cow,0,0.4,0.4,0.6,0.0,incerto,0.22,1.0,0.0,0.0,não cachorro,0.4981019032056285,0.0076,0.9924,0.0,incerto
+BaseNãoCachorros/cow_1377.jpeg,cow,0,0.8,0.0,0.0,1.0,cachorro,0.48,0.08,0.92,0.0,incerto,0.3310941674324485,0.6756,0.3244,0.0,não cachorro
+BaseNãoCachorros/cow_1723.jpeg,cow,0,0.2,1.0,0.0,0.0,não cachorro,0.37,0.52,0.48,0.0,não cachorro,0.4598543262358792,0.1606,0.8394,0.0,incerto
+BaseNãoCachorros/cow_1743.jpeg,cow,0,0.8,0.0,0.0,1.0,cachorro,0.43,0.28,0.72,0.0,incerto,0.4729845565259018,0.1081,0.8919,0.0,incerto
+BaseNãoCachorros/cow_1771.jpeg,cow,0,0.4,0.4,0.6,0.0,incerto,0.35,0.6,0.4,0.0,não cachorro,0.2270364581857263,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/cow_1787.jpeg,cow,0,0.4,0.4,0.6,0.0,incerto,0.55,0.0,0.8,0.2,incerto,0.301459532988852,0.7942,0.2058,0.0,não cachorro
+BaseNãoCachorros/horse_0298.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.71,0.0,0.16,0.84,cachorro,0.4601924182307949,0.1592,0.8408,0.0,incerto
+BaseNãoCachorros/horse_0565.jpeg,horse,0,0.6,0.0,0.6,0.4,incerto,0.38,0.48,0.52,0.0,incerto,0.5243672390336452,0.0,0.9025,0.0975,incerto
+BaseNãoCachorros/horse_0736.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.62,0.0,0.52,0.48,incerto,0.6449572143242166,0.0,0.4202,0.5798,cachorro
+BaseNãoCachorros/horse_0948.jpeg,horse,0,0.8,0.0,0.0,1.0,cachorro,0.61,0.0,0.56,0.44,incerto,0.4057724101664727,0.3769,0.6231,0.0,incerto
+BaseNãoCachorros/horse_1152.jpeg,horse,0,0.6,0.0,0.6,0.4,incerto,0.6,0.0,0.6,0.4,incerto,0.3194100076428519,0.7224,0.2776,0.0,não cachorro
+BaseNãoCachorros/horse_1201.jpeg,horse,0,0.8,0.0,0.0,1.0,cachorro,0.71,0.0,0.16,0.84,cachorro,0.2498812434287436,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/horse_1231.jpeg,horse,0,0.8,0.0,0.0,1.0,cachorro,0.55,0.0,0.8,0.2,incerto,0.445092447760346,0.2196,0.7804,0.0,incerto
+BaseNãoCachorros/horse_1259.jpeg,horse,0,0.6,0.0,0.6,0.4,incerto,0.43,0.28,0.72,0.0,incerto,0.3484761445748028,0.6061,0.3939,0.0,não cachorro
+BaseNãoCachorros/horse_1607.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.56,0.0,0.76,0.24,incerto,0.5024158474150863,0.0,0.9903,0.0097,incerto
+BaseNãoCachorros/horse_1760.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.46,0.16,0.84,0.0,incerto,0.69817349633656,0.0,0.2073,0.7927,cachorro
+BaseNãoCachorros/horse_1817.jpeg,horse,0,0.0,1.0,0.0,0.0,não cachorro,0.21,1.0,0.0,0.0,não cachorro,0.4948249345819672,0.0207,0.9793,0.0,incerto
+BaseNãoCachorros/horse_1950.jpeg,horse,0,0.6,0.0,0.6,0.4,incerto,0.54,0.0,0.84,0.16,incerto,0.519287919830884,0.0,0.9228,0.0772,incerto
+BaseNãoCachorros/horse_2003.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.6,0.0,0.6,0.4,incerto,0.3724379410824062,0.5102,0.4898,0.0,não cachorro
+BaseNãoCachorros/horse_2072.jpeg,horse,0,0.8,0.0,0.0,1.0,cachorro,0.55,0.0,0.8,0.2,incerto,0.5297322188890526,0.0,0.8811,0.1189,incerto
+BaseNãoCachorros/horse_2230.jpeg,horse,0,0.6,0.0,0.6,0.4,incerto,0.69,0.0,0.24,0.76,cachorro,0.5225478678507952,0.0,0.9098,0.0902,incerto
+BaseNãoCachorros/horse_2239.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.36,0.56,0.44,0.0,não cachorro,0.5168390101129853,0.0,0.9326,0.0674,incerto
+BaseNãoCachorros/horse_2294.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.1,1.0,0.0,0.0,não cachorro,0.3956237075287635,0.4175,0.5825,0.0,incerto
+BaseNãoCachorros/horse_2316.jpeg,horse,0,1.0,0.0,0.0,1.0,cachorro,0.58,0.0,0.68,0.32,incerto,0.3577608551034761,0.569,0.431,0.0,não cachorro
+BaseNãoCachorros/horse_2322.jpeg,horse,0,0.4,0.4,0.6,0.0,incerto,0.61,0.0,0.56,0.44,incerto,0.5215795429046808,0.0,0.9137,0.0863,incerto
+BaseNãoCachorros/horse_2541.jpeg,horse,0,0.6,0.0,0.6,0.4,incerto,0.4,0.4,0.6,0.0,incerto,0.4119526020207205,0.3522,0.6478,0.0,incerto
+BaseNãoCachorros/sheep_0041.jpeg,sheep,0,0.2,1.0,0.0,0.0,não cachorro,0.43,0.28,0.72,0.0,incerto,0.3211178270362637,0.7155,0.2845,0.0,não cachorro
+BaseNãoCachorros/sheep_0099.jpeg,sheep,0,0.8,0.0,0.0,1.0,cachorro,0.51,0.0,0.96,0.04,incerto,0.3904126160817793,0.4383,0.5617,0.0,incerto
+BaseNãoCachorros/sheep_0195.jpeg,sheep,0,0.4,0.4,0.6,0.0,incerto,0.19,1.0,0.0,0.0,não cachorro,0.1772523988006166,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/sheep_0250.jpeg,sheep,0,0.4,0.4,0.6,0.0,incerto,0.55,0.0,0.8,0.2,incerto,0.4728475213423603,0.1086,0.8914,0.0,incerto
+BaseNãoCachorros/sheep_0265.jpeg,sheep,0,0.2,1.0,0.0,0.0,não cachorro,0.43,0.28,0.72,0.0,incerto,0.2236087246601572,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/sheep_0267.jpeg,sheep,0,0.8,0.0,0.0,1.0,cachorro,0.66,0.0,0.36,0.64,cachorro,0.1859801083678431,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/sheep_0321.jpeg,sheep,0,0.8,0.0,0.0,1.0,cachorro,0.48,0.08,0.92,0.0,incerto,0.4731945047767145,0.1072,0.8928,0.0,incerto
+BaseNãoCachorros/sheep_0327.jpeg,sheep,0,0.2,1.0,0.0,0.0,não cachorro,0.58,0.0,0.68,0.32,incerto,0.453830943165277,0.1847,0.8153,0.0,incerto
+BaseNãoCachorros/sheep_0354.jpeg,sheep,0,0.0,1.0,0.0,0.0,não cachorro,0.39,0.44,0.56,0.0,incerto,0.3146325857729433,0.7415,0.2585,0.0,não cachorro
+BaseNãoCachorros/sheep_0557.jpeg,sheep,0,0.6,0.0,0.6,0.4,incerto,0.6,0.0,0.6,0.4,incerto,0.3707940539044468,0.5168,0.4832,0.0,não cachorro
+BaseNãoCachorros/sheep_0560.jpeg,sheep,0,0.6,0.0,0.6,0.4,incerto,0.43,0.28,0.72,0.0,incerto,0.3128447954960807,0.7486,0.2514,0.0,não cachorro
+BaseNãoCachorros/sheep_0672.jpeg,sheep,0,0.4,0.4,0.6,0.0,incerto,0.28,0.88,0.12,0.0,não cachorro,0.2147482823257652,1.0,0.0,0.0,não cachorro
+BaseNãoCachorros/sheep_0839.jpeg,sheep,0,0.8,0.0,0.0,1.0,cachorro,0.43,0.28,0.72,0.0,incerto,0.3512853128728842,0.5949,0.4051,0.0,não cachorro
+BaseNãoCachorros/sheep_0920.jpeg,sheep,0,0.8,0.0,0.0,1.0,cachorro,0.38,0.48,0.52,0.0,incerto,0.5119488169748668,0.0,0.9522,0.0478,incerto
+BaseNãoCachorros/sheep_0953.jpeg,sheep,0,0.6,0.0,0.6,0.4,incerto,0.4,0.4,0.6,0.0,incerto,0.3360052089688759,0.656,0.344,0.0,não cachorro
+BaseNãoCachorros/sheep_1123.jpeg,sheep,0,0.8,0.0,0.0,1.0,cachorro,0.48,0.08,0.92,0.0,incerto,0.4055117033010291,0.378,0.622,0.0,incerto
+BaseNãoCachorros/sheep_1222.jpeg,sheep,0,0.4,0.4,0.6,0.0,incerto,0.59,0.0,0.64,0.36,incerto,0.2672858988140588,0.9309,0.0691,0.0,não cachorro
+BaseNãoCachorros/sheep_1229.jpeg,sheep,0,0.6,0.0,0.6,0.4,incerto,0.46,0.16,0.84,0.0,incerto,0.5605721993102917,0.0,0.7577,0.2423,incerto
+BaseNãoCachorros/sheep_1251.jpeg,sheep,0,0.4,0.4,0.6,0.0,incerto,0.31,0.76,0.24,0.0,não cachorro,0.4486404322867728,0.2054,0.7946,0.0,incerto
+BaseNãoCachorros/sheep_1274.jpeg,sheep,0,0.2,1.0,0.0,0.0,não cachorro,0.19,1.0,0.0,0.0,não cachorro,0.3093325199482371,0.7627,0.2373,0.0,não cachorro

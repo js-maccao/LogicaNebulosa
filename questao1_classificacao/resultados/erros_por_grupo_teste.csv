@@ -1,0 +1,7 @@
+Grupo,Imagens no teste,Erros KNN,Erros Random Forest,Erros SVM (cor + forma)
+cachorro,100,35,37,42
+cat,20,12,8,10
+chicken,20,12,9,7
+cow,20,12,3,2
+horse,20,11,13,9
+sheep,20,10,6,2

@@ -1,0 +1,10 @@
+Modelo,Termo,Imagens,Acertos,Erros,Acurácia
+KNN,não cachorro,28,17,11,0.6071428571428571
+KNN,incerto,108,54,54,0.5
+KNN,cachorro,64,37,27,0.578125
+Random Forest,não cachorro,35,23,12,0.6571428571428571
+Random Forest,incerto,133,79,54,0.5939849624060151
+Random Forest,cachorro,32,22,10,0.6875
+SVM (cor + forma),não cachorro,51,41,10,0.803921568627451
+SVM (cor + forma),incerto,116,62,54,0.5344827586206896
+SVM (cor + forma),cachorro,33,25,8,0.7575757575757576

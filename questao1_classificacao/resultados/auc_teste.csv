@@ -1,0 +1,4 @@
+Modelo,ROC-AUC
+KNN,0.5700000000000001
+Random Forest,0.65345
+SVM (cor + forma),0.7297

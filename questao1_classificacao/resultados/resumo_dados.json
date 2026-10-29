@@ -1,0 +1,70 @@
+{
+  "total_validas": 1000,
+  "por_classe": {
+    "0": 500,
+    "1": 500
+  },
+  "por_grupo": {
+    "cachorro": 500,
+    "cat": 100,
+    "chicken": 100,
+    "cow": 100,
+    "horse": 100,
+    "sheep": 100
+  },
+  "racas_distintas": 120,
+  "por_conjunto": {
+    "treino": {
+      "total": 640,
+      "por_classe": {
+        "0": 320,
+        "1": 320
+      },
+      "por_grupo": {
+        "cachorro": 320,
+        "cat": 64,
+        "chicken": 64,
+        "cow": 64,
+        "horse": 64,
+        "sheep": 64
+      }
+    },
+    "validacao": {
+      "total": 160,
+      "por_classe": {
+        "0": 80,
+        "1": 80
+      },
+      "por_grupo": {
+        "cachorro": 80,
+        "cat": 16,
+        "chicken": 16,
+        "cow": 16,
+        "horse": 16,
+        "sheep": 16
+      }
+    },
+    "teste": {
+      "total": 200,
+      "por_classe": {
+        "0": 100,
+        "1": 100
+      },
+      "por_grupo": {
+        "cachorro": 100,
+        "cat": 20,
+        "chicken": 20,
+        "cow": 20,
+        "horse": 20,
+        "sheep": 20
+      }
+    }
+  },
+  "corrompidas_ignoradas": [],
+  "arquivos_em_duplicatas": 0,
+  "verificacao_divisao": {
+    "sem_sobreposicao_de_caminhos": true,
+    "duplicatas_entre_conjuntos": 0
+  },
+  "semente": 42
+}
