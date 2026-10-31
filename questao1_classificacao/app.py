@@ -1,7 +1,6 @@
-"""Interface Streamlit.  Executar com:  streamlit run app.py
+"""Interface Streamlit:  streamlit run app.py
 
-A interface NÃO treina nada: só lê os modelos salvos (modelos/) e os resultados
-gerados por treinar.py (resultados/).
+Não treina nada: só lê os modelos de modelos/ e os resultados de resultados/.
 """
 import inspect
 import json
@@ -32,9 +31,7 @@ AVISO_LIMITACOES = (
 )
 
 
-# --------------------------------------------------------------------------
-# Carregamento (com cache: lê do disco uma vez, não treina de novo)
-# --------------------------------------------------------------------------
+# cache: cada arquivo é lido do disco uma vez só
 @st.cache_resource
 def carregar_modelo_em_cache(chave: str):
     return modelos.carregar_modelo(chave)
@@ -51,7 +48,7 @@ def ler_csv(nome: str, **kw):
 
 
 def exigir_resultados():
-    """Para a página com mensagem amigável se o treinamento ainda não foi feito."""
+    """Interrompe a página se o treinamento ainda não foi feito."""
     faltando = [n for n in ["resumo_dados.json", "metricas_teste.csv", "matrizes_teste.json"]
                 if not (R / n).exists()]
     if faltando or not modelos.caminho_modelo("knn").exists():
@@ -107,20 +104,20 @@ def pagina_visao_geral():
 # Página 2 - Classificar imagem
 # --------------------------------------------------------------------------
 def validar_upload(arquivo):
-    """Devolve (bytes, mensagem_de_erro). Checa tamanho e se o Pillow consegue abrir."""
+    """Devolve (bytes, mensagem_de_erro)."""
     dados = arquivo.getvalue()
     if len(dados) > cfg.TAMANHO_MAX_UPLOAD_MB * 1024 * 1024:
         return None, f"O arquivo tem mais de {cfg.TAMANHO_MAX_UPLOAD_MB} MB."
     try:
         with Image.open(BytesIO(dados)) as img:
             img.verify()
-    except Exception:  # noqa: BLE001 - qualquer falha de leitura = arquivo inválido
+    except Exception:
         return None, "Não foi possível abrir este arquivo como imagem (formato não suportado ou arquivo corrompido)."
     return dados, None
 
 
 def entrada_do_modelo(chave: str, dados: bytes) -> np.ndarray:
-    """Transforma a imagem enviada na MESMA representação usada no treino desse modelo."""
+    """Mesma preparação usada no treino desse modelo."""
     if modelos.ENTRADA_MODELO[chave] == "pixels":
         return pre_processamento.preparar_imagem(BytesIO(dados)).reshape(1, -1)
     return pre_processamento.extrair_atributos(BytesIO(dados)).reshape(1, -1)
@@ -143,11 +140,11 @@ def pagina_classificar():
         return
 
     try:
-        x = entrada_do_modelo(escolha, dados)                                  # mesma função do treino
+        x = entrada_do_modelo(escolha, dados)
         modelo = carregar_modelo_em_cache(escolha)
         proba = modelos.probabilidades(modelo, x)                             # {classe: probabilidade}
         classe = int(modelo.predict(x)[0])
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         st.error(f"Erro ao classificar a imagem: {e}")
         return
 
@@ -228,8 +225,7 @@ def pagina_matrizes():
     st.header("Exemplos reais de erros")
     previsoes = ler_csv("previsoes_teste.csv")
     chave = st.radio("Modelo", list(modelos.NOMES_MODELOS), format_func=modelos.NOMES_MODELOS.get, horizontal=True)
-    prev, proba = previsoes[f"previsto_{chave}"], previsoes[f"proba_cachorro_{chave}"]
-    erros = previsoes[prev != previsoes["rotulo"]].copy()
+    erros = previsoes[previsoes[f"previsto_{chave}"] != previsoes["rotulo"]].copy()
     erros["confianca"] = erros.apply(
         lambda l: l[f"proba_cachorro_{chave}"] if l[f"previsto_{chave}"] == 1 else 1 - l[f"proba_cachorro_{chave}"],
         axis=1)
@@ -265,40 +261,41 @@ def pagina_codigo():
     with st.expander("2. Como as imagens viram números - `pre_processamento.py` → `preparar_imagem()`"):
         st.write("Os algoritmos só entendem números. A imagem vira um vetor de 4096 valores entre 0 e 1. "
                  "A **mesma função** é usada no treino, no teste e no upload.")
+        mostrar_funcao(pre_processamento.abrir_rgb)
         mostrar_funcao(pre_processamento.preparar_imagem)
-    with st.expander("3. O que são X e y - `preparar_dados.py` → `montar_X_y()`"):
-        st.write("**X** é a matriz de atributos (uma linha por imagem, 4096 colunas de pixels). "
-                 "**y** é o vetor de respostas corretas (0 ou 1).")
-        mostrar_funcao(preparar_dados.montar_X_y)
-    with st.expander("4. Como os dados são divididos - `preparar_dados.py` → `dividir()`"):
-        st.write("20% teste; dos 80% restantes, 20% validação; o resto é treino. Estratificado por grupo, "
-                 "`random_state=42`. `verificar_divisao()` confirma que nenhuma imagem repete.")
-        mostrar_funcao(preparar_dados.dividir)
-    with st.expander("2b. Atributos de cor e forma do SVM - `pre_processamento.py` → `extrair_atributos()`"):
+    with st.expander("3. Atributos de cor e forma do SVM - `pre_processamento.py` → `extrair_atributos()`"):
         st.write("Histograma de cor HSV (quais cores aparecem) + HOG (para onde apontam as bordas em cada região).")
         mostrar_funcao(pre_processamento.extrair_atributos)
         mostrar_funcao(pre_processamento.hog)
-    with st.expander("5. Onde os modelos são criados e treinados - `modelos.py` e `treinar.py`"):
+    with st.expander("4. O que são X e y - `preparar_dados.py` → `montar_X_y()`"):
+        st.write("**X** é a matriz de atributos (uma linha por imagem, 4096 colunas de pixels). "
+                 "**y** é o vetor de respostas corretas (0 ou 1).")
+        mostrar_funcao(preparar_dados.montar_X_y)
+    with st.expander("5. Como os dados são divididos - `preparar_dados.py` → `dividir()`"):
+        st.write("20% teste; dos 80% restantes, 20% validação; o resto é treino. Estratificado por grupo, "
+                 "`random_state=42`. `verificar_divisao()` confirma que nenhuma imagem repete.")
+        mostrar_funcao(preparar_dados.dividir)
+    with st.expander("6. Onde os modelos são criados e treinados - `modelos.py` e `treinar.py`"):
         st.write("`criar_knn()`, `criar_random_forest()` e `criar_svm_atributos()` definem os modelos; "
                  "`treinar.py → main()` chama `modelo.fit(X, y)`. A versão final é treinada com treino + validação.")
         mostrar_funcao(modelos.criar_knn)
         mostrar_funcao(modelos.criar_random_forest)
         mostrar_funcao(modelos.criar_svm_atributos)
-    with st.expander("6. Onde as previsões e probabilidades são calculadas"):
+    with st.expander("7. Onde as previsões e probabilidades são calculadas"):
         st.write("`modelo.predict(X)` devolve a classe; `modelo.predict_proba(X)` devolve as probabilidades, "
                  "na ordem de `modelo.classes_`. Em `treinar.py` (teste) e `app.py → pagina_classificar()` (upload).")
         mostrar_funcao(modelos.probabilidades)
-    with st.expander("7. Onde as métricas são calculadas - `avaliar.py` → `calcular_metricas()`"):
+    with st.expander("8. Onde as métricas são calculadas - `avaliar.py` → `calcular_metricas()`"):
         mostrar_funcao(avaliar.calcular_metricas)
-    with st.expander("8. Onde as matrizes de confusão são geradas - `avaliar.py` → `matriz_confusao()`"):
+    with st.expander("9. Onde as matrizes de confusão são geradas - `avaliar.py` → `matriz_confusao()`"):
         mostrar_funcao(avaliar.matriz_confusao)
         st.write("Chamada em `treinar.py → main()` com os rótulos reais do teste e as previsões do modelo final.")
-    with st.expander("9. Como os modelos são salvos e carregados - `modelos.py`"):
-        st.write("`salvar_modelo()` usa `joblib.dump` (via arquivo temporário); `carregar_modelo()` usa "
+    with st.expander("10. Como os modelos são salvos e carregados - `modelos.py`"):
+        st.write("`salvar_modelo()` usa `joblib.dump` e `carregar_modelo()` usa "
                  "`joblib.load`. No Streamlit, `st.cache_resource` evita reler o arquivo a cada clique.")
         mostrar_funcao(modelos.salvar_modelo)
         mostrar_funcao(modelos.carregar_modelo)
-    with st.expander("10. Fluxo completo do treinamento - `treinar.py` → `main()`"):
+    with st.expander("11. Fluxo completo do treinamento - `treinar.py` → `main()`"):
         mostrar_funcao(treinar.main)
 
 

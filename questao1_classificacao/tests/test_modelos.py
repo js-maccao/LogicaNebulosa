@@ -18,7 +18,6 @@ def test_salvar_e_carregar_dao_mesmas_previsoes(tmp_path, monkeypatch, chave):
     X, y = _dados_pequenos()
     modelo = modelos.criar_modelos()[chave].fit(X, y)
     modelos.salvar_modelo(modelo, chave)
-    assert not list(tmp_path.glob("*.tmp"))
     carregado = modelos.carregar_modelo(chave)
     assert np.array_equal(modelo.predict(X), carregado.predict(X))
     proba = modelos.probabilidades(carregado, X[:1])

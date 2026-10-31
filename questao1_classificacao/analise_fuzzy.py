@@ -2,26 +2,13 @@
 
 Uso:  python analise_fuzzy.py        (antes, rode: python treinar.py)
 
-Ideia central
--------------
-A saída "crisp" (clássica) de um classificador é 0 ou 1: cachorro ou não. Mas,
-antes de decidir, o modelo calcula P(cachorro) entre 0 e 1. Na lógica nebulosa
-esse número é lido como GRAU DE PERTINÊNCIA ao conjunto "cachorro":
+P(cachorro) é lida como grau de pertinência ao conjunto "cachorro", e o corte
+em 0,5 do predict() como uma defuzzificação. Sobre P(cachorro) defino três
+termos que somam 1 em qualquer ponto:
 
-    μ_cachorro(imagem)     = P(cachorro)
-    μ_não_cachorro(imagem) = 1 - P(cachorro)
-
-Uma imagem com P = 0,97 é "muito cachorro"; com P = 0,52 é "um pouco mais
-cachorro do que não", ou seja, quase totalmente ambígua. O corte em 0,5
-(predict) é uma DEFUZZIFICAÇÃO: transforma o grau em uma resposta sim/não e
-joga fora a informação de incerteza.
-
-Para deixar isso explícito, definimos três termos linguísticos sobre P(cachorro)
-(uma partição fuzzy: em qualquer ponto as três pertinências somam 1):
-
-    "não cachorro": 1 até 0,25, cai linearmente até 0 em 0,50
-    "incerto":      triângulo 0,25 -> 1 em 0,50 -> 0,75
-    "cachorro":     0 até 0,50, sobe linearmente até 1 em 0,75
+    "não cachorro": 1 até 0,25, cai até 0 em 0,50
+    "incerto":      triângulo 0,25 -> 1 em 0,50 -> 0 em 0,75
+    "cachorro":     0 até 0,50, sobe até 1 em 0,75
 
 Gera em resultados/:
   pertinencia_fuzzy.png            funções de pertinência + onde caem as imagens de teste
@@ -32,8 +19,6 @@ Gera em resultados/:
   zona_incerta.csv                 acertos/erros por termo linguístico, por modelo
   pertinencia_teste.csv            μ de cada imagem de teste, por modelo
 """
-import sys
-
 import matplotlib
 
 matplotlib.use("Agg")
@@ -51,36 +36,30 @@ from preparar_dados import caminho_absoluto
 R = cfg.PASTA_RESULTADOS
 ARQ_PREVISOES = R / "previsoes_teste.csv"
 
-# Pontos que definem as funções de pertinência (sobre o eixo P(cachorro))
+# pontos das funções de pertinência, no eixo P(cachorro)
 INICIO_INCERTO, CENTRO, FIM_INCERTO = 0.25, 0.50, 0.75
 TERMOS = ["não cachorro", "incerto", "cachorro"]
 CORES_TERMOS = {"não cachorro": "#3478d2", "incerto": "#f2a93b", "cachorro": "#d64541"}
 LIMIARES = np.round(np.arange(0.05, 0.951, 0.05), 2)
 
 
-# --------------------------------------------------------------------------
-# Funções de pertinência
-# --------------------------------------------------------------------------
 def pertinencias(p) -> dict:
     """Grau de pertinência de cada termo linguístico para P(cachorro) = p (escalar ou array)."""
     p = np.asarray(p, dtype=float)
     largura = CENTRO - INICIO_INCERTO
     nao = np.clip((CENTRO - p) / largura, 0, 1)
     cachorro = np.clip((p - CENTRO) / (FIM_INCERTO - CENTRO), 0, 1)
-    incerto = 1 - nao - cachorro                          # o que sobra: partição fuzzy (soma = 1)
+    incerto = 1 - nao - cachorro                          # assim os três sempre somam 1
     return {"não cachorro": nao, "incerto": incerto, "cachorro": cachorro}
 
 
 def termo_dominante(p) -> np.ndarray:
-    """Termo linguístico com maior pertinência (empate fica com o termo de menor índice)."""
+    """Termo com maior pertinência (no empate fica o primeiro de TERMOS)."""
     graus = pertinencias(p)
     matriz = np.vstack([graus[t] for t in TERMOS])
     return np.array(TERMOS)[matriz.argmax(axis=0)]
 
 
-# --------------------------------------------------------------------------
-# Tabelas
-# --------------------------------------------------------------------------
 def tabela_zonas(previsoes: pd.DataFrame) -> pd.DataFrame:
     """Para cada modelo e termo dominante: quantas imagens e quantas a decisão crisp acertou."""
     linhas = []
@@ -114,9 +93,6 @@ def metricas_por_limiar(y, p, limiares=LIMIARES) -> pd.DataFrame:
     return df
 
 
-# --------------------------------------------------------------------------
-# Figuras
-# --------------------------------------------------------------------------
 def figura_pertinencia(previsoes, chave):
     eixo = np.linspace(0, 1, 501)
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 6), sharex=True, gridspec_kw={"height_ratios": [3, 1.3]})
@@ -137,7 +113,7 @@ def figura_pertinencia(previsoes, chave):
     for rotulo, cor in ((0, CORES_TERMOS["não cachorro"]), (1, CORES_TERMOS["cachorro"])):
         m = y == rotulo
         ax2.scatter(p[m], rotulo + rng.uniform(-0.25, 0.25, m.sum()), s=12, alpha=0.6, color=cor)
-    ax2.axvspan(0.375, 0.625, color=CORES_TERMOS["incerto"], alpha=0.15)
+    ax2.axvspan(0.375, 0.625, color=CORES_TERMOS["incerto"], alpha=0.15)   # onde "incerto" domina
     ax2.set_yticks([0, 1], labels=["real: não cachorro", "real: cachorro"])
     ax2.set_xlabel("P(cachorro) estimada pelo modelo")
     ax2.grid(alpha=0.3)
@@ -183,8 +159,7 @@ def figura_limiares(previsoes):
 
 
 def tabela_auc(previsoes) -> pd.DataFrame:
-    """ROC-AUC: chance de uma imagem de cachorro qualquer receber P(cachorro) maior que uma de
-    não cachorro qualquer. 0,5 = acaso; 1 = separa perfeitamente. Não depende do limiar."""
+    """ROC-AUC: 0,5 = acaso, 1 = separa perfeitamente. Usa a probabilidade, não o limiar."""
     linhas = {n: roc_auc_score(previsoes["rotulo"], previsoes[f"proba_cachorro_{c}"])
               for c, n in modelos.NOMES_MODELOS.items()}
     return pd.Series(linhas, name="ROC-AUC").rename_axis("Modelo").to_frame()
@@ -207,7 +182,7 @@ def figura_roc(previsoes, auc):
 
 
 def escolher_exemplos(previsoes, chave, n_por_tipo=3):
-    """Exemplos: decisões seguras e certas, casos incertos e erros 'confiantes'."""
+    """Acertos com folga, casos mais incertos e erros "confiantes"."""
     p = previsoes[f"proba_cachorro_{chave}"]
     certeza = (p - 0.5).abs()
     acerto = previsoes[f"previsto_{chave}"] == previsoes["rotulo"]
@@ -245,7 +220,6 @@ def figura_exemplos(previsoes, chave):
     return fig
 
 
-# --------------------------------------------------------------------------
 def modelo_de_referencia() -> str:
     """Modelo usado nas figuras de um só modelo: o de maior acurácia no teste."""
     metricas = pd.read_csv(R / "metricas_teste.csv", index_col="Modelo", encoding="utf-8")
@@ -285,8 +259,4 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as erro:
-        print(f"\nERRO na análise fuzzy: {erro!r}", file=sys.stderr)
-        raise SystemExit(1)
+    main()

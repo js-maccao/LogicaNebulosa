@@ -10,3 +10,9 @@ venv/
 .idea/
 Thumbs.db
 desktop.ini
+
+# Anotações pessoais (estudo e roteiro da apresentação)
+anotacoes/
+questao3_reforco_galinha/checkpoints_painel/
+questao3_reforco_galinha/checkpoints_backup_*/
+backups_reset/

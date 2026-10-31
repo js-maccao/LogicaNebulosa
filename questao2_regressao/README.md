@@ -13,7 +13,10 @@ pip install -r ..\requirements.txt
 python gerar_dados.py      # cria dados\passagens.csv (5.000 passagens, semente 42)
 python regressao.py        # treina, mede no teste e gera as figuras em resultados\   (~10 s)
 python -m pytest           # 8 testes automáticos
+streamlit run app.py       # interface visual (http://localhost:8501)
 ```
+
+A interface tem 5 páginas: visão geral, prever o preço de um voo (com pertinência fuzzy), comparação dos modelos, contínuo × fuzzy e entenda o código. Treina os modelos na primeira abertura (~10 s) e lê as figuras de `resultados\`, então rode `gerar_dados.py` e `regressao.py` antes.
 
 ## Dados (sintéticos)
 

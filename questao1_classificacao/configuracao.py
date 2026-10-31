@@ -1,7 +1,4 @@
-"""Configuração central do projeto: caminhos das bases, tamanho da imagem, semente.
-
-Se as pastas das imagens mudarem de lugar, basta alterar este arquivo.
-"""
+"""Caminhos, tamanhos de imagem, semente e hiperparâmetros usados no projeto todo."""
 from pathlib import Path
 
 # --- Caminhos ---------------------------------------------------------------
@@ -41,16 +38,14 @@ N_ATRIBUTOS_HOG = (_CELULAS - 1) ** 2 * 4 * ORIENTACOES_HOG                  # 7
 N_ATRIBUTOS_EXTRAIDOS = N_ATRIBUTOS_COR + N_ATRIBUTOS_HOG
 
 # --- Divisão dos dados --------------------------------------------------------
-# A semente fixa torna o sorteio da divisão (e das florestas) reprodutível:
-# rodar de novo gera exatamente os mesmos conjuntos e os mesmos modelos.
-SEMENTE = 42
+SEMENTE = 42                 # mesma divisão e mesma floresta toda vez que rodar
 FRACAO_TESTE = 0.20          # 20% do total  -> teste final
 FRACAO_VALIDACAO = 0.20      # 20% do que sobrou -> validação
 
-# --- Hiperparâmetros (valores iniciais pedidos; não ajustados com o teste) -----
+# --- Hiperparâmetros ----------------------------------------------------------
 KNN_VIZINHOS = 5
 RF_ARVORES = 100
-SVM_C = 1.0                  # escolhido na VALIDAÇÃO entre 1, 3 e 10 (nunca no teste)
+SVM_C = 1.0                  # testei 1, 3 e 10 na validação; 1 foi o melhor
 FOLDS_VALIDACAO_CRUZADA = 5
 
 # --- Upload na interface ------------------------------------------------------

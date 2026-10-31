@@ -27,11 +27,8 @@ ARQ_RESUMO = cfg.PASTA_RESULTADOS / "resumo_dados.json"
 ARQ_DUPLICATAS = cfg.PASTA_RESULTADOS / "duplicatas.csv"
 
 
-# --------------------------------------------------------------------------
-# 1. Leitura das pastas
-# --------------------------------------------------------------------------
 def _listar_arquivos(pasta):
-    """Busca recursiva por imagens (por extensão), em ordem estável."""
+    """Imagens da pasta e subpastas, em ordem alfabética (para a tabela sair sempre igual)."""
     if not pasta.is_dir():
         raise FileNotFoundError(f"Pasta não encontrada: {pasta}")
     return sorted(p for p in pasta.rglob("*")
@@ -39,7 +36,7 @@ def _listar_arquivos(pasta):
 
 
 def montar_tabela() -> pd.DataFrame:
-    """Monta o DataFrame. O RÓTULO vem da pasta de origem, nunca do conteúdo."""
+    """Uma linha por imagem. O rótulo vem da pasta de origem."""
     linhas = []
     for p in _listar_arquivos(cfg.PASTA_CACHORROS):
         raca = re.sub(r"^n\d+-", "", p.parent.name)          # 'n02085620-Chihuahua' -> 'Chihuahua'
@@ -51,19 +48,15 @@ def montar_tabela() -> pd.DataFrame:
         linhas.append((p, cfg.ROTULO_NAO_CACHORRO, especie, especie))
 
     df = pd.DataFrame(linhas, columns=["caminho", "rotulo", "grupo", "raca_especie"])
-    # Caminho relativo à pasta das bases: o CSV funciona em outro computador.
+    # caminho relativo, para o CSV funcionar em outro computador
     df["caminho"] = df["caminho"].map(lambda p: p.relative_to(cfg.RAIZ_BASES).as_posix())
     return df
 
 
 def caminho_absoluto(caminho_relativo: str):
-    """Converte o caminho guardado na tabela de volta para um caminho completo."""
     return cfg.RAIZ_BASES / caminho_relativo
 
 
-# --------------------------------------------------------------------------
-# 2. Validação dos arquivos
-# --------------------------------------------------------------------------
 def validar_arquivos(df: pd.DataFrame):
     """Separa imagens legíveis das corrompidas e calcula o hash de cada arquivo."""
     validas, corrompidas, hashes = [], [], []
@@ -74,7 +67,7 @@ def validar_arquivos(df: pd.DataFrame):
                 img.verify()                                 # detecta arquivo truncado/inválido
             validas.append(True)
             hashes.append(hashlib.sha256(arq.read_bytes()).hexdigest())
-        except Exception as erro:                            # noqa: BLE001 - qualquer falha = ilegível
+        except Exception as erro:                            # qualquer falha = imagem ilegível
             validas.append(False)
             hashes.append(None)
             corrompidas.append({"caminho": caminho, "erro": repr(erro)})
@@ -83,21 +76,16 @@ def validar_arquivos(df: pd.DataFrame):
 
 
 def achar_duplicatas(df: pd.DataFrame) -> pd.DataFrame:
-    """Arquivos com conteúdo byte a byte idêntico (mesmo hash). Não remove nada."""
+    """Arquivos com conteúdo idêntico (mesmo hash). Só lista, não remove nada."""
     dup = df[df.duplicated("hash_arquivo", keep=False)].sort_values("hash_arquivo")
     return dup[["hash_arquivo", "caminho", "rotulo", "grupo"]]
 
 
-# --------------------------------------------------------------------------
-# 3. Divisão treino / validação / teste
-# --------------------------------------------------------------------------
 def dividir(df: pd.DataFrame) -> pd.DataFrame:
-    """Divide UMA vez, estratificando pelo GRUPO (6 grupos), com semente fixa.
+    """20% do total vai para o teste; dos 80% que sobram, 20% vão para a validação.
 
-    1) 20% do total -> teste final.
-    2) Dos 80% restantes, 20% -> validação; o resto -> treino.
-    A estratificação por grupo mantém proporções parecidas de classe E de espécie
-    nos três conjuntos.
+    Estratifico pelo grupo (cachorro + 5 espécies) para que cada espécie apareça
+    na mesma proporção nos três conjuntos, e não só cada classe.
     """
     indices = np.arange(len(df))
     idx_dev, idx_teste = train_test_split(
@@ -114,7 +102,7 @@ def dividir(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def verificar_divisao(df: pd.DataFrame) -> dict:
-    """Garante (com assert) que nenhuma imagem ficou em dois conjuntos."""
+    """Confere que nenhuma imagem ficou em dois conjuntos."""
     partes = {c: set(df.loc[df["conjunto"] == c, "caminho"]) for c in ["treino", "validacao", "teste"]}
     assert not partes["treino"] & partes["validacao"], "imagem em treino e validação"
     assert not partes["treino"] & partes["teste"], "imagem em treino e teste"
@@ -122,20 +110,17 @@ def verificar_divisao(df: pd.DataFrame) -> dict:
     assert sum(len(p) for p in partes.values()) == len(df), "imagem sem conjunto"
     assert df["caminho"].is_unique, "caminho repetido na tabela"
 
-    # Duplicatas exatas que ficaram em conjuntos diferentes = vazamento potencial.
+    # duplicatas exatas em conjuntos diferentes seriam vazamento do teste
     conjuntos_por_hash = df.groupby("hash_arquivo")["conjunto"].nunique()
     vazamentos = int((conjuntos_por_hash > 1).sum())
     return {"sem_sobreposicao_de_caminhos": True, "duplicatas_entre_conjuntos": vazamentos}
 
 
-# --------------------------------------------------------------------------
-# 4. X e y
-# --------------------------------------------------------------------------
 def montar_X_y(df: pd.DataFrame, entrada: str = "pixels"):
-    """X = matriz de atributos (uma linha por imagem); y = vetor de rótulos (0/1).
+    """X: uma linha por imagem; y: rótulos 0/1.
 
-    entrada="pixels"    -> (n_imagens, 4096) tons de cinza   (KNN e Random Forest)
-    entrada="atributos" -> (n_imagens, 1892) cor HSV + HOG    (SVM)
+    entrada="pixels"    -> 4096 colunas, tons de cinza (KNN e Random Forest)
+    entrada="atributos" -> 1892 colunas, cor HSV + HOG (SVM)
     """
     caminhos = [caminho_absoluto(c) for c in df["caminho"]]
     if entrada == "pixels":
@@ -150,13 +135,11 @@ def montar_X_y(df: pd.DataFrame, entrada: str = "pixels"):
 
 
 def carregar_divisao() -> pd.DataFrame:
-    """Lê a tabela já dividida (gerada por este script)."""
     if not ARQ_DIVISAO.exists():
         raise FileNotFoundError("Divisão não encontrada. Rode primeiro: python preparar_dados.py")
     return pd.read_csv(ARQ_DIVISAO, encoding="utf-8")
 
 
-# --------------------------------------------------------------------------
 def contagens(df: pd.DataFrame) -> dict:
     por_conjunto = {}
     for c in ["treino", "validacao", "teste"]:

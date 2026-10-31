@@ -1,16 +1,3 @@
-# Python
-__pycache__/
-*.pyc
-.pytest_cache/
-.venv/
-venv/
-
-# Modelos treinados: reproduza com  python preparar_dados.py && python treinar.py
-# (resultados/ e as imagens das bases SÃO versionados, para o professor ver tudo sem treinar)
+# Modelos treinados (recriar com: python preparar_dados.py && python treinar.py)
 modelos/*
 !modelos/README.md
-*.tmp
-*.tar
-
-# Anotações pessoais (não fazem parte da entrega)
-BaseCachorro/Claude outputs/

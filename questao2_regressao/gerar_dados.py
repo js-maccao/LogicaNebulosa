@@ -3,10 +3,9 @@
 Uso:  python gerar_dados.py            (grava dados/passagens.csv)
       python gerar_dados.py --n 8000   (outra quantidade de passagens)
 
-POR QUE SINTÉTICA? Não há uma base pública de preços de passagens que rode
-offline sem cadastro. Por isso o preço é gerado por uma REGRA CONHECIDA mais
-um ruído aleatório. Isso tem uma vantagem didática: sabemos exatamente o que o
-modelo deveria aprender e podemos checar se ele aprendeu. As companhias e os
+Não achei uma base pública de preços de passagens que desse para usar offline e
+sem cadastro, então o preço sai de uma regra conhecida mais um ruído aleatório.
+A vantagem é saber exatamente o que o modelo deveria aprender. Companhias e
 valores são fictícios; as distâncias entre as cidades são aproximadas.
 
 Regra do preço (todos os fatores multiplicam):

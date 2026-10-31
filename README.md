@@ -2,13 +2,11 @@
 
 **Universidade Carioca · Aprendizado de Máquina e Lógica Nebulosa · Prof. Mardônio França**
 
-Enunciado: [`fromalizacaoTrabalho.pdf`](fromalizacaoTrabalho.pdf) · Apresentação: [`apresentacao.pdf`](apresentacao.pdf)
-
 | Questão | Pasta | Problema | Modelos | Principal resultado |
 |---|---|---|---|---|
 | 1. Classificação | [`questao1_classificacao/`](questao1_classificacao/README.md) | Imagem: cachorro x não cachorro | KNN, Random Forest, SVM (cor + HOG) | SVM: acurácia 0,64 e ROC-AUC 0,73 no teste; probabilidade analisada como pertinência fuzzy |
 | 2. Regressão | [`questao2_regressao/`](questao2_regressao/README.md) | Preço de passagens aéreas (dados sintéticos) | Regressão Linear, Gradient Boosting | Gradient Boosting: R² 0,957, MAE R$ 108 |
-| 3. Aprendizado por reforço | [`questao3_reforco_galinha/`](questao3_reforco_galinha/README.md) | Galinha atravessando uma rua com carros (labirinto com obstáculos móveis) | Q-learning tabular (do zero) | 100% de travessias sem exploração, contra 0% do agente aleatório |
+| 3. Aprendizado por reforço | [`questao3_reforco_galinha/`](questao3_reforco_galinha/README.md) | Galinha atravessando uma rua com carros (labirinto com obstáculos móveis) | Q-learning tabular (do zero) | 99,9% de travessias sem exploração (checkpoint final), contra 0% do agente aleatório |
 
 Cada pasta tem um `README.md` com o modelo, os resultados e a discussão pedida no enunciado, além de testes automáticos (`tests/`).
 
@@ -50,8 +48,6 @@ python visualizador.py          # galinha treinada jogando (janela pygame)
 # treinar do zero (sobrescreve os checkpoints): python treinar.py --do-zero --episodios 20000 --checkpoint-cada 1000
 cd ..
 
-# Apresentação em PDF (lê os resultados das 3 questões)
-python gerar_apresentacao.py
 ```
 
 ## Testes
@@ -74,17 +70,11 @@ cd questao3_reforco_galinha; python -m pytest; cd ..    # 12 testes
 - **Q2:** sintéticos, gerados por `gerar_dados.py` com uma regra documentada.
 - **Q3:** não usa dados: o ambiente é simulado em `galinha_env.py`.
 
-## Publicar no GitHub (entrega)
 
-O repositório local já está criado e com o primeiro commit. Para publicar:
+## Painel (interface para tudo)
 
-1. Crie um repositório **público** vazio em https://github.com/new (sem README).
-2. No terminal, na pasta `C:\dev\LogicaNebulosa`:
+```powershell
+streamlit run painel.py
+```
 
-   ```powershell
-   git remote add origin https://github.com/<seu-usuario>/<nome-do-repo>.git
-   git push -u origin main
-   ```
-
-3. Preencha `ALUNO` (e, se quiser, `TURMA` e `REPOSITORIO`) no topo de `gerar_apresentacao.py`, rode `python gerar_apresentacao.py`, faça commit e push.
-4. Envie o link do repositório e o `apresentacao.pdf` para mardfranca@gmail.com.
+Executa por botões os mesmos comandos do terminal (Q1, Q2, Q3) com log ao vivo, tabelas e figuras, e roda a galinha dentro do navegador: treino com gráfico ao vivo, replay de qualquer checkpoint e treino passo a passo com a equação do Q-learning. Os treinos do painel gravam em `questao3_reforco_galinha/checkpoints_painel/`; a pasta oficial `checkpoints/` só é tocada se você marcar a opção (com backup automático).

@@ -1,21 +1,14 @@
-"""Métricas, matrizes de confusão e análise de erros.
+"""Métricas, matrizes de confusão e erros por grupo.
 
-Convenção: classe positiva = Cachorro (rótulo 1); negativa = Não cachorro (0).
+Classe positiva = Cachorro (1). Na matriz, linhas = classe real e colunas = prevista:
 
-Matriz de confusão (linhas = classe REAL, colunas = classe PREVISTA):
-
-                     previsto 0 (Não cachorro)   previsto 1 (Cachorro)
-  real 0 (Não cach.)   VN  verdadeiro negativo     FP  falso positivo
-  real 1 (Cachorro)    FN  falso negativo          VP  verdadeiro positivo
-
-  VP: era cachorro e o modelo disse cachorro.
-  VN: não era cachorro e o modelo disse não cachorro.
-  FP: NÃO era cachorro, mas o modelo disse cachorro (alarme falso).
-  FN: ERA cachorro, mas o modelo disse não cachorro (cachorro perdido).
+                 previsto 0   previsto 1
+    real 0          VN           FP        (FP: animal tomado por cachorro)
+    real 1          FN           VP        (FN: cachorro perdido)
 """
 import matplotlib
 
-matplotlib.use("Agg")  # gera figuras sem abrir janela (necessário no Streamlit e em scripts)
+matplotlib.use("Agg")  # só gera as figuras, sem abrir janela
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -29,17 +22,9 @@ METRICAS = ["Acurácia", "Precisão", "Recall", "F1-score", "F2-score"]
 
 
 def calcular_metricas(y_real, y_previsto) -> dict:
-    """As cinco métricas pedidas, com as funções oficiais do scikit-learn.
+    """Acurácia, precisão, recall, F1 e F2 (o F2 dá mais peso ao recall).
 
-    - Acurácia: % de acertos no total.
-    - Precisão: dos que o modelo chamou de cachorro, quantos eram cachorro.
-    - Recall: dos cachorros reais, quantos o modelo encontrou.
-    - F1: média harmônica de precisão e recall (pesos iguais).
-    - F2: como o F1, mas o recall pesa mais (beta=2): perder um cachorro custa mais.
-
-    pos_label=1 diz que "positivo" = cachorro. zero_division=0 evita erro/aviso
-    quando precisão ou recall teriam divisão por zero (ex.: o modelo nunca prevê
-    cachorro): nesse caso a métrica vale 0.
+    zero_division=0: se o modelo nunca prevê cachorro, a precisão vale 0 em vez de dar aviso.
     """
     kw = dict(pos_label=cfg.ROTULO_CACHORRO, zero_division=0)
     return {
@@ -52,22 +37,15 @@ def calcular_metricas(y_real, y_previsto) -> dict:
 
 
 def tabela_metricas(resultados: dict) -> pd.DataFrame:
-    """resultados = {nome_do_modelo: (y_real, y_previsto)} -> DataFrame (modelo x métrica).
-
-    Os valores guardam a precisão total; só a EXIBIÇÃO usa 4 casas decimais.
-    """
+    """{nome_do_modelo: (y_real, y_previsto)} -> tabela com uma linha por modelo."""
     linhas = {nome: calcular_metricas(y, yp) for nome, (y, yp) in resultados.items()}
     df = pd.DataFrame.from_dict(linhas, orient="index", columns=METRICAS)
     df.index.name = "Modelo"
     return df
 
 
-def formatar_4_casas(df: pd.DataFrame):
-    return df.style.format("{:.4f}")
-
-
 def matriz_confusao(y_real, y_previsto) -> np.ndarray:
-    """Matriz 2x2; labels=[0, 1] fixa a ordem: linha/coluna 0 = Não cachorro, 1 = Cachorro."""
+    """Matriz 2x2. labels=[0, 1] garante a ordem mesmo se faltar uma classe."""
     return confusion_matrix(y_real, y_previsto, labels=[0, 1])
 
 
@@ -115,14 +93,14 @@ def desenhar_comparacao(df_metricas: pd.DataFrame, titulo: str):
 
 
 def probabilidade_de_cachorro(modelo, X) -> np.ndarray:
-    """Probabilidade da classe 1 para cada linha de X, achando a coluna por `classes_`."""
+    """P(cachorro) para cada linha de X."""
     return modelo.predict_proba(X)[:, coluna_da_classe(modelo, cfg.ROTULO_CACHORRO)]
 
 
 def erros_por_grupo(meta_teste: pd.DataFrame, previsoes: dict) -> pd.DataFrame:
     """Quantos erros cada modelo cometeu em cada grupo (cachorro, cat, chicken, ...).
 
-    meta_teste: DataFrame com 'grupo' e 'rotulo'. previsoes: {nome_modelo: array de previsões}.
+    previsoes = {nome_do_modelo: array com as previsões no teste}
     """
     linhas = []
     for grupo in cfg.GRUPOS:

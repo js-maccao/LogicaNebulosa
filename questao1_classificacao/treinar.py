@@ -2,17 +2,15 @@
 
 Uso:  python treinar.py        (antes, rode: python preparar_dados.py)
 
-Fluxo:
-  1. Carrega a divisão treino/validação/teste e transforma as imagens em números (X, y).
-     Duas representações: pixels (KNN e RF) e atributos de cor + forma (SVM).
-  2. Treina os três modelos SÓ com o treino e mede na VALIDAÇÃO (base das decisões).
-  3. Validação cruzada estratificada (5 folds) em treino+validação (informação extra).
-  4. Treina a versão FINAL de cada modelo com treino + validação (sem o teste).
-  5. Salva os modelos e avalia UMA vez no TESTE (nenhuma decisão é tomada com ele).
+Etapas:
+  1. Lê a divisão e transforma as imagens em X (pixels para KNN/RF, cor + HOG para o SVM).
+  2. Treina só com o treino e mede na validação.
+  3. Validação cruzada (5 folds) em treino + validação, como informação extra.
+  4. Treina os modelos finais com treino + validação e salva.
+  5. Avalia uma única vez no teste.
 """
 import json
 import platform
-import sys
 from datetime import datetime
 
 import numpy as np
@@ -32,10 +30,9 @@ R = cfg.PASTA_RESULTADOS
 
 
 def validacao_cruzada(Xs_dev: dict, y_dev, grupos_dev) -> pd.DataFrame:
-    """5 folds estratificados pelo grupo; cada fold re-treina o modelo do zero.
+    """5 folds estratificados pelo grupo, os mesmos para os três modelos.
 
-    Xs_dev = {"pixels": X, "atributos": X}: cada modelo usa a sua representação,
-    mas TODOS usam exatamente os mesmos folds (comparação justa).
+    Xs_dev = {"pixels": X, "atributos": X}, porque cada modelo usa a sua entrada.
     """
     kw = dict(pos_label=1, zero_division=0)
     pontuadores = {
@@ -70,18 +67,20 @@ def main():
     print(f"y: {y.shape}")
 
     def X_de(chave):
-        """Matriz de entrada do modelo `chave` (pixels ou atributos)."""
         return Xs[modelos.ENTRADA_MODELO[chave]]
 
-    treino, val, teste, dev = (df["conjunto"] == "treino").to_numpy(), (df["conjunto"] == "validacao").to_numpy(), \
-        (df["conjunto"] == "teste").to_numpy(), (df["conjunto"] != "teste").to_numpy()
+    conjunto = df["conjunto"].to_numpy()
+    treino = conjunto == "treino"
+    val = conjunto == "validacao"
+    teste = conjunto == "teste"
+    dev = ~teste                                                  # treino + validação
     print(f"treino={treino.sum()} validação={val.sum()} teste={teste.sum()} (teste ainda não usado)")
 
     # --- 2. treino -> validação ---------------------------------------------
     prev_val = {}
     for chave, modelo in modelos.criar_modelos().items():
         X = X_de(chave)
-        modelo.fit(X[treino], y[treino])                         # fit: aprende com o treino
+        modelo.fit(X[treino], y[treino])
         prev_val[modelos.NOMES_MODELOS[chave]] = (y[val], modelo.predict(X[val]))
     metricas_val = avaliar.tabela_metricas(prev_val)
     print("\nVALIDAÇÃO (modelos treinados só com o treino):")
@@ -121,7 +120,7 @@ def main():
               avaliar.vp_vn_fp_fn(m))
     print("\nErros por grupo no teste:\n", erros.to_string(index=False))
 
-    # --- gravação dos resultados (só chega aqui se nada falhou) ---------------
+    # --- gravação dos resultados ---------------------------------------------
     metricas_val.to_csv(R / "metricas_validacao.csv", encoding="utf-8")
     metricas_teste.to_csv(R / "metricas_teste.csv", encoding="utf-8")
     cv.to_csv(R / "validacao_cruzada.csv", encoding="utf-8")
@@ -158,8 +157,4 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as erro:  # mensagem clara; modelos só são gravados no passo 4
-        print(f"\nERRO no treinamento: {erro!r}", file=sys.stderr)
-        raise SystemExit(1)
+    main()

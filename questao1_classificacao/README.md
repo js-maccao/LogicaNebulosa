@@ -84,20 +84,20 @@ Matriz de confusão: linhas = classe real, colunas = classe prevista.
 | Random Forest | 0,6000 | 0,5976 | 0,6125 | 0,6049 | 0,6095 |
 | SVM (cor + forma) | **0,6938** | **0,6962** | **0,6875** | **0,6918** | **0,6892** |
 
-**Validação cruzada** (5 folds em treino + validação), acurácia média: KNN 0,554 (±0,020), Random Forest 0,625 (±0,021), SVM 0,681 (±0,018).
+**Validação cruzada** (5 folds em treino + validação), acurácia média: KNN 0,554 (±0,020), Random Forest 0,624 (±0,020), SVM 0,681 (±0,021).
 
 **Teste final** (200 imagens; modelos treinados com treino + validação; avaliados uma única vez)
 
 | Modelo | Acurácia | Precisão | Recall | F1 | F2 | ROC-AUC |
 |---|---|---|---|---|---|---|
 | KNN | 0,5400 | 0,5328 | **0,6500** | 0,5856 | 0,6226 | 0,5700 |
-| Random Forest | 0,6200 | 0,6176 | 0,6300 | **0,6238** | **0,6275** | 0,6534 |
+| Random Forest | 0,6150 | 0,6117 | 0,6300 | **0,6207** | **0,6262** | 0,6503 |
 | SVM (cor + forma) | **0,6400** | **0,6591** | 0,5800 | 0,6170 | 0,5943 | **0,7297** |
 
 | Modelo | VP | VN | FP | FN |
 |---|---|---|---|---|
 | KNN | 65 | 43 | 57 | 35 |
-| Random Forest | 63 | 61 | 39 | 37 |
+| Random Forest | 63 | 60 | 40 | 37 |
 | SVM (cor + forma) | 58 | 70 | 30 | 42 |
 
 **Erros por grupo no teste** (cada grupo de não cachorro tem 20 imagens; cachorro tem 100)
@@ -106,7 +106,7 @@ Matriz de confusão: linhas = classe real, colunas = classe prevista.
 |---|---|---|---|
 | cachorro | 35 | 37 | 42 |
 | gato | 12 | 8 | 10 |
-| galinha | 12 | 9 | 7 |
+| galinha | 12 | 10 | 7 |
 | vaca | 12 | 3 | 2 |
 | cavalo | 11 | 13 | 9 |
 | ovelha | 10 | 6 | 2 |
@@ -115,7 +115,7 @@ Matriz de confusão: linhas = classe real, colunas = classe prevista.
 
 - Os três modelos ficam acima do acaso (50%), mas longe de um classificador profissional: as representações são simples e a base é pequena.
 - O **SVM com cor + HOG** foi o melhor na validação, na validação cruzada, na acurácia de teste e, principalmente, na **ROC-AUC** (0,73 contra 0,65 e 0,57). Isso indica que as probabilidades dele *ordenam* melhor as imagens.
-- **No teste, porém, a vantagem em acurácia é pequena** (0,64 contra 0,62 do RF). Com 200 imagens, a margem de erro de uma acurácia é de cerca de ±7 pontos (95%), então essa diferença isolada não é conclusiva. A AUC, a validação e a validação cruzada apontam na mesma direção.
+- **No teste, porém, a vantagem em acurácia é pequena** (0,640 contra 0,615 do RF). Com 200 imagens, a margem de erro de uma acurácia é de cerca de ±7 pontos (95%), então essa diferença isolada não é conclusiva. A AUC, a validação e a validação cruzada apontam na mesma direção.
 - Cada modelo erra de um jeito diferente. O KNN chama muitos animais de cachorro (57 FP; maior recall). O SVM é o mais "conservador" (menos FP, maior precisão, mas perde mais cachorros: 42 FN). Se perder um cachorro for o erro mais grave (F2), o RF no limiar 0,5 é a melhor escolha. A figura `metricas_vs_limiar.png` mostra que baixar o limiar do SVM aumenta o recall dele.
 - Vaca e ovelha foram fáceis para o SVM (cores de pasto/céu, formas grandes); gato e cavalo foram os mais confundidos com cachorro.
 
@@ -142,12 +142,12 @@ Para tornar isso explícito, `analise_fuzzy.py` define três **termos linguísti
 | Modelo | "não cachorro" | "incerto" | "cachorro" |
 |---|---|---|---|
 | KNN | 60,7% (28 imgs) | 50,0% (108) | 57,8% (64) |
-| Random Forest | 65,7% (35) | 59,4% (133) | 68,8% (32) |
-| SVM (cor + forma) | **80,4%** (51) | 53,4% (116) | **75,8%** (33) |
+| Random Forest | 65,7% (35) | 58,6% (133) | 68,8% (32) |
+| SVM (cor + forma) | **80,0%** (50) | 53,8% (117) | **75,8%** (33) |
 
-- No SVM, quando a pertinência é clara o modelo acerta 76% a 80% das vezes; na zona **incerta**, acerta 53%, o que é praticamente um cara ou coroa. **O grau de pertinência informa o quanto confiar em cada resposta**, e a saída crisp joga essa informação fora.
-- A maioria das imagens (58% no SVM) cai na zona incerta, o que é coerente com um modelo de 64% de acurácia. As probabilidades calibradas do SVM ficam entre 0,18 e 0,74: o modelo "sabe que não sabe".
-- O KNN só produz 6 valores de probabilidade (0, 0,2, …, 1), uma pertinência "em degraus". RF e SVM produzem graus mais contínuos (54 e 200 valores distintos no teste).
+- No SVM, quando a pertinência é clara o modelo acerta 76% a 80% das vezes; na zona **incerta**, acerta 54%, praticamente um cara ou coroa. **O grau de pertinência informa o quanto confiar em cada resposta**, e a saída crisp joga essa informação fora.
+- A maioria das imagens (117 de 200 no SVM) cai na zona incerta, o que é coerente com um modelo de 64% de acurácia. As probabilidades calibradas do SVM ficam entre 0,18 e 0,74: o modelo "sabe que não sabe".
+- O KNN só produz 6 valores de probabilidade (0, 0,2, …, 1), uma pertinência "em degraus". RF e SVM produzem graus mais contínuos (53 e 200 valores distintos no teste).
 - `metricas_vs_limiar.png` mostra que o limiar 0,5 é uma escolha arbitrária: mover o corte troca precisão por recall. Em vez de um sistema crisp, um sistema fuzzy poderia responder "cachorro", "não cachorro" ou "**não sei, revisar manualmente**".
 - A própria categoria é difusa: alguns gatos e cachorros pequenos se parecem mais entre si do que um chihuahua se parece com um são-bernardo. As fronteiras do conceito "cachorro" no espaço de atributos não são nítidas.
 
@@ -173,7 +173,6 @@ questao1_classificacao/
 ├── analise_fuzzy.py       item c): pertinência fuzzy, zona incerta, limiares, ROC
 ├── app.py                 interface Streamlit (5 páginas)
 ├── tests/                 pytest (49 testes)
-├── docs/GUIA_APRESENTACAO.md
 ├── BaseCachorro/  BaseNãoCachorros/   imagens
 ├── modelos/ (gerado)  resultados/ (gerado, versionado)
 ```

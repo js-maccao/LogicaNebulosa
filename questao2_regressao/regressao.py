@@ -2,26 +2,25 @@
 
 Uso:  python regressao.py        (antes, rode: python gerar_dados.py)
 
-Fluxo:
-  1. Lê dados/passagens.csv e separa X (características do voo) e y (preço em R$).
-  2. Divide em treino (80%) e teste (20%) com semente fixa.
-  3. Treina dois modelos: Regressão Linear (referência simples) e Gradient Boosting.
-  4. Mede MAE, MSE, RMSE e R² no TESTE e gera os gráficos.
-  5. (c) Contínuo x discreto: corta o preço em faixas crisp e mostra o que se perde.
-  6. (d) Lógica fuzzy: graus de pertinência de "barata", "média" e "cara".
+Etapas:
+  1. Lê dados/passagens.csv: X = características do voo, y = preço em R$.
+  2. Treino 80% / teste 20%.
+  3. Treina Regressão Linear (referência) e Gradient Boosting.
+  4. MAE, MSE, RMSE e R² no teste, com os gráficos.
+  5. Item c): corta o preço previsto em faixas crisp para comparar com o valor contínuo.
+  6. Item d): graus de pertinência de "barata", "média" e "cara".
 
 Gera em resultados/:
   metricas.csv, previsoes_teste.csv, exemplos_pertinencia.csv, faixas_matriz.csv
   previsto_vs_real.png, residuos.png, importancia_variaveis.png,
   continuo_vs_discreto.png, pertinencia_preco.png
 """
-import sys
 from pathlib import Path
 
 import matplotlib
 
 matplotlib.use("Agg")
-matplotlib.rcParams["text.parse_math"] = False   # "R$" nos textos não vira fórmula matemática
+matplotlib.rcParams["text.parse_math"] = False   # senão o "R$" dos textos vira fórmula
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -45,19 +44,16 @@ CATEGORICAS = ["companhia", "classe", "dia_semana", "periodo_dia"]
 ALVO = "preco"
 NOMES_MODELOS = {"linear": "Regressão Linear", "boosting": "Gradient Boosting"}
 
-# --- Faixas de preço (para comparar contínuo x discreto) -----------------------
+# --- Faixas de preço ----------------------------------------------------------
 FAIXAS = ["barata", "média", "cara"]
 LIMITES_CRISP = (600.0, 1200.0)              # barata < 600 <= média < 1200 <= cara
-# Funções de pertinência fuzzy: "barata" vale 1 até R$ 300 e cai até 0 em R$ 900;
-# "média" é um triângulo 300 -> 900 -> 1500; "cara" sobe de 0 em R$ 900 até 1 em R$ 1500.
-# Elas se cruzam (μ = 0,5) exatamente nos limites crisp 600 e 1200.
+# "barata" vale 1 até R$ 300 e cai até 0 em R$ 900; "média" é um triângulo 300 -> 900 -> 1500;
+# "cara" sobe de 0 em R$ 900 até 1 em R$ 1500. Escolhi esses pontos para as curvas se
+# cruzarem (μ = 0,5) exatamente nos limites crisp 600 e 1200.
 PONTOS_FUZZY = (300.0, 900.0, 1500.0)
 CORES_FAIXAS = {"barata": "#3a9a5b", "média": "#f2a93b", "cara": "#d64541"}
 
 
-# --------------------------------------------------------------------------
-# Dados e modelos
-# --------------------------------------------------------------------------
 def carregar_dados():
     if not ARQ_DADOS.exists():
         raise FileNotFoundError("Dados não encontrados. Rode antes: python gerar_dados.py")
@@ -66,10 +62,7 @@ def carregar_dados():
 
 
 def preprocessador():
-    """Números são padronizados (média 0, desvio 1); categorias viram colunas 0/1 (one-hot).
-
-    Fica dentro do Pipeline: é ajustado só com o treino e reaplicado igual no teste.
-    """
+    """Numéricas padronizadas; categóricas viram colunas 0/1 (one-hot). Ajustado só no treino."""
     return ColumnTransformer([
         ("numericas", StandardScaler(), NUMERICAS),
         ("categoricas", OneHotEncoder(handle_unknown="ignore", sparse_output=False), CATEGORICAS),
@@ -77,9 +70,10 @@ def preprocessador():
 
 
 def criar_modelos() -> dict:
-    """Regressão Linear: preço = soma de pesos x atributos (uma reta/plano).
-    Gradient Boosting: soma de muitas árvores pequenas, cada uma corrigindo o erro das anteriores;
-    capta efeitos não lineares (ex.: antecedência) e combinações (ex.: executiva x distância).
+    """Gradient Boosting: muitas árvores pequenas, cada uma corrigindo o erro das anteriores.
+
+    Ao contrário da linear, consegue pegar o efeito exponencial da antecedência e o
+    fato de os fatores se multiplicarem (executiva x distância).
     """
     return {
         "linear": Pipeline([("prep", preprocessador()), ("modelo", LinearRegression())]),
@@ -97,11 +91,8 @@ def calcular_metricas(y_real, y_previsto) -> dict:
             "RMSE": float(np.sqrt(mse)), "R2": r2_score(y_real, y_previsto)}
 
 
-# --------------------------------------------------------------------------
-# Contínuo x discreto e lógica fuzzy
-# --------------------------------------------------------------------------
 def faixa_crisp(preco) -> np.ndarray:
-    """Discretização clássica: cada preço pertence a UMA faixa, com pertinência 0 ou 1."""
+    """Cada preço cai em exatamente uma faixa (pertinência 0 ou 1)."""
     preco = np.asarray(preco, dtype=float)
     return np.array(FAIXAS)[np.digitize(preco, LIMITES_CRISP)]
 
@@ -115,9 +106,11 @@ def pertinencias(preco) -> dict:
     return {"barata": barata, "média": 1 - barata - cara, "cara": cara}
 
 
-# --------------------------------------------------------------------------
-# Figuras
-# --------------------------------------------------------------------------
+def mais_proximo(valores, alvo) -> int:
+    """Índice do valor mais próximo de `alvo`."""
+    return int(np.argmin(np.abs(valores - alvo)))
+
+
 def figura_previsto_vs_real(y, previsoes, metricas):
     fig, axs = plt.subplots(1, len(previsoes), figsize=(5.5 * len(previsoes), 5), sharey=True)
     limite = max(y.max(), max(p.max() for p in previsoes.values())) * 1.03
@@ -167,7 +160,7 @@ def figura_importancia(modelo, X_teste, y_teste):
 
 def figura_continuo_vs_discreto(y, prev):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 4.8), gridspec_kw={"width_ratios": [1.6, 1]})
-    # (a) 40 passagens de teste ordenadas pelo preço previsto: valor contínuo x faixa crisp
+    # esquerda: 40 passagens de teste ordenadas pelo preço previsto, valor contínuo x faixa
     rng = np.random.default_rng(SEMENTE)
     idx = np.sort(rng.choice(len(prev), 40, replace=False))
     idx = idx[np.argsort(prev[idx])]
@@ -189,7 +182,7 @@ def figura_continuo_vs_discreto(y, prev):
     ax1.set_ylim(0, p.max() * 1.1)
     ax1.grid(alpha=0.3)
 
-    # (b) a regressão vira classificação quando cortamos em faixas: matriz de confusão
+    # direita: cortando em faixas, a regressão vira uma classificação de 3 classes
     m = confusion_matrix(faixa_crisp(y), faixa_crisp(prev), labels=FAIXAS)
     ax2.imshow(m, cmap="Blues")
     for i in range(3):
@@ -229,7 +222,6 @@ def figura_pertinencia(exemplos):
     return fig
 
 
-# --------------------------------------------------------------------------
 def main():
     R.mkdir(exist_ok=True)
     X, y = carregar_dados()
@@ -238,8 +230,8 @@ def main():
 
     modelos, previsoes, linhas = {}, {}, {}
     for chave, modelo in criar_modelos().items():
-        modelo.fit(X_treino, y_treino)                      # aprende só com o treino
-        previsoes[chave] = modelo.predict(X_teste)          # um número real por passagem
+        modelo.fit(X_treino, y_treino)
+        previsoes[chave] = modelo.predict(X_teste)
         linhas[NOMES_MODELOS[chave]] = calcular_metricas(y_teste, previsoes[chave])
         modelos[chave] = modelo
     metricas = pd.DataFrame.from_dict(linhas, orient="index")
@@ -260,14 +252,14 @@ def main():
 
     # exemplos para a discussão: passagens perto e longe dos limites das faixas
     alvos = [450, 590, 610, 900, 1150, 1250, 2000]
-    exemplos = saida.iloc[[int(np.argmin(np.abs(prev - a))) for a in alvos]]
+    exemplos = saida.iloc[[mais_proximo(prev, a) for a in alvos]]
     colunas_ex = ["preco_real", f"previsto_{melhor}", "faixa_prevista", "mu_barata", "mu_média", "mu_cara"]
 
     figuras = {
         "previsto_vs_real": figura_previsto_vs_real(y_teste, previsoes, metricas),
         "residuos": figura_residuos(y_teste, previsoes),
         "importancia_variaveis": figura_importancia(modelos[melhor], X_teste, y_teste),
-        "pertinencia_preco": figura_pertinencia([prev[int(np.argmin(np.abs(prev - a)))] for a in (450, 610, 1150, 1900)]),
+        "pertinencia_preco": figura_pertinencia([prev[mais_proximo(prev, a)] for a in (450, 610, 1150, 1900)]),
     }
     figuras["continuo_vs_discreto"], matriz_faixas = figura_continuo_vs_discreto(y_teste, prev)
     for nome, fig in figuras.items():
@@ -290,8 +282,4 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as erro:
-        print(f"\nERRO na regressão: {erro!r}", file=sys.stderr)
-        raise SystemExit(1)
+    main()

@@ -26,7 +26,7 @@ from matplotlib.patches import Rectangle
 import numpy as np
 
 from galinha_env import TravessiaGalinha, NOMES_ACOES
-from treinar import carregar_checkpoint, media_movel, PASTA, PASTA_CHECKPOINTS, N_ACOES
+from treinar import carregar_checkpoint, salvar_grafico, PASTA, PASTA_CHECKPOINTS, N_ACOES
 
 PASTA_RESULTADOS = os.path.join(PASTA, "resultados")
 N_AVALIACAO = 1000           # partidas por checkpoint na avaliacao
@@ -79,22 +79,6 @@ def avaliar(escolher, n=N_AVALIACAO, semente_base=10_000):
 
 
 # ===== FIGURAS =====
-def grafico_treino(historico):
-    pontos = [p for p, _ in historico]
-    chegou = [100.0 if r == "chegou" else 0.0 for _, r in historico]
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 7), sharex=True)
-    for ax, dados, titulo in ((ax1, pontos, "Pontos por episodio"),
-                              (ax2, chegou, "% de vezes que chegou")):
-        suave, j = media_movel(dados)
-        ax.plot(range(j, j + len(suave)), suave)
-        ax.set_title(f"{titulo} durante o treino (media movel de {j})")
-        ax.grid(alpha=0.3)
-    ax2.set_xlabel("episodio")
-    fig.tight_layout()
-    fig.savefig(os.path.join(PASTA_RESULTADOS, "curva_aprendizado.png"), dpi=120)
-    plt.close(fig)
-
-
 def grafico_checkpoints(linhas, base):
     eps = [e for e, *_ in linhas]
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 7), sharex=True)
@@ -201,8 +185,8 @@ def main(caminho_ck, semente):
     q, epsilon, episodio, historico = carregar_checkpoint(caminho_ck)
     print(f"Checkpoint: {caminho_ck} (episodio {episodio}, {len(q)} estados na tabela Q)")
 
-    # 1) evolucao durante o treino
-    grafico_treino(historico)
+    # 1) evolucao durante o treino (mesmo grafico que o treinar.py gera no fim)
+    salvar_grafico(historico)
 
     # 2) cada checkpoint avaliado sem exploracao, contra a linha de base aleatoria
     base = avaliar(politica_aleatoria)

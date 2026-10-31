@@ -19,9 +19,9 @@ python visualizador.py --treinar --do-zero                            # treino a
 python -m pytest                                                      # testes automáticos (12 testes)
 ```
 
-> `checkpoints/treino_antigo_19-10/` guarda um checkpoint de um treino anterior (ep. 57.000). Ele fica numa subpasta para não ser misturado à evolução do treino atual (ep. 1.000 a 56.000), que é o que `avaliar.py` analisa. **Cuidado:** `treinar.py --do-zero` e `visualizador.py --treinar` sobrescrevem os checkpoints da pasta.
+O treino de 20.000 episódios leva cerca de 1 minuto. Os checkpoints do treino que usei já estão em `checkpoints/` (um a cada 1.000 episódios até o 56.000, depois 60.000 e 65.000; o `ultimo.pkl` está no episódio 66.717), então `avaliar.py` e `visualizador.py` funcionam sem treinar de novo.
 
-O treino de 20.000 episódios leva cerca de 1 minuto. Os checkpoints de um treino de 56.000 episódios (um a cada 1.000) já estão na pasta `checkpoints/`, então `avaliar.py` e `visualizador.py` funcionam sem treinar de novo.
+> `checkpoints/treino_antigo_19-10/` guarda um checkpoint de um treino anterior (ep. 57.000), separado para não entrar na evolução que o `avaliar.py` analisa. **Cuidado:** `treinar.py --do-zero` e `visualizador.py --treinar` sobrescrevem os checkpoints da pasta.
 
 | Arquivo | O que faz |
 |---|---|
@@ -30,7 +30,6 @@ O treino de 20.000 episódios leva cerca de 1 minuto. Os checkpoints de um trein
 | `avaliar.py` | Avalia os checkpoints e gera as figuras em `resultados/` |
 | `visualizador.py`, `visual.py` | Demonstração gráfica em pygame |
 | `tests/test_galinha.py` | Testes: regras do ambiente, recompensas, equação do Q-learning, checkpoints, agente treinado |
-| `GUIA_APRESENTACAO.md`, `ROTEIRO_APRESENTACAO.md` | Explicação detalhada do projeto, roteiro e perguntas frequentes |
 
 ## a) Ambiente e agente
 
@@ -72,7 +71,7 @@ com α = 0,1, γ = 0,95 e ε decaindo de 1,0 até 0,05 (fator 0,9995 por episód
 
 Todas as figuras são geradas por `python avaliar.py`.
 
-**Evolução durante o treino** (`resultados/curva_aprendizado.png`): média móvel de 500 episódios dos pontos e da taxa de travessia. A curva sai de −50 pontos / 0%, sobe rápido entre os episódios 2.000 e 6.000 (quando ε cai de 0,37 para 0,05) e estabiliza perto de +90 pontos / ~76% a partir do episódio 8.000. Esses valores incluem as 5% de ações aleatórias da exploração.
+**Evolução durante o treino** (`resultados/curva_aprendizado.png`): média móvel de 500 episódios dos pontos e da taxa de travessia. A curva sai de −50 pontos / 0%, sobe rápido entre os episódios 2.000 e 6.000 (quando ε cai de 0,37 para 0,05) e estabiliza perto de +90 pontos / 75% a 80% a partir do episódio 8.000. Esses valores incluem as 5% de ações aleatórias da exploração.
 
 ![Curva de aprendizado](resultados/curva_aprendizado.png)
 
@@ -88,17 +87,18 @@ Todas as figuras são geradas por `python avaliar.py`.
 | episódio 10.000 | 95,7% | 124,7 | 18,6 |
 | episódio 20.000 | 90,4% | 112,0 | 23,7 |
 | episódio 30.000 | 96,7% | 127,6 | 17,0 |
-| episódio 56.000 | **100,0%** | **133,3** | **16,7** |
+| episódio 56.000 | 100,0% | 133,3 | 16,7 |
+| episódio 65.000 (final) | **99,9%** | **133,3** | **16,6** |
 
-A curva não é monotônica (o episódio 20.000 piorou em relação ao 10.000): com α = 0,1 e ε = 0,05 a tabela Q continua oscilando, e um checkpoint pode estar num momento ruim. Por isso a avaliação usa 1.000 partidas fixas e sem exploração.
+A curva não é monotônica (o episódio 20.000 piorou em relação ao 10.000): com α = 0,1 e ε = 0,05 a tabela Q continua oscilando, e um checkpoint pode estar num momento ruim. Por isso a avaliação usa 1.000 partidas fixas e sem exploração. Depois do episódio 50.000 todos os checkpoints ficam entre 99% e 100%, então treinar além disso quase não muda nada.
 
 ![Evolução dos checkpoints](resultados/evolucao_checkpoints.png)
 
-**Caminho final** (`resultados/caminho_final.png` e `resultados/caminho_final.txt`): uma partida jogada pelo agente final, quadro a quadro. Ele atravessa em 21 passos (129 pontos), recuando (`BAIXO` nos passos 1 e 3), esperando (`PARADA` nos passos 6, 12 e 19) e desviando para os lados quando um carro se aproxima.
+**Caminho final** (`resultados/caminho_final.png` e `resultados/caminho_final.txt`): uma partida jogada pelo agente final (episódio 65.000), quadro a quadro. Ele atravessa em 21 passos (129 pontos), recuando (`BAIXO` nos passos 1 e 3), esperando (`PARADA` nos passos 6, 12 e 19) e desviando para os lados quando um carro se aproxima.
 
 ![Caminho final](resultados/caminho_final.png)
 
-**Evolução do caminho** (`resultados/caminho_evolucao.png`): a mesma partida jogada por checkpoints de épocas diferentes. Esta partida é difícil: no episódio 1.000 a galinha sobe direto e é atropelada na pista 4; nos episódios 15.000, 29.000 e 42.000 ela já chega até a pista 7, mas cai sempre na mesma armadilha; só o agente final (56.000) escapa e atravessa.
+**Evolução do caminho** (`resultados/caminho_evolucao.png`): a mesma partida jogada por checkpoints de épocas diferentes. Esta partida é difícil: no episódio 1.000 a galinha sobe direto e é atropelada na pista 4; nos episódios 15.000, 29.000 e 44.000 ela já chega até a pista 7, mas cai sempre na mesma armadilha; só o agente final (65.000) escapa e atravessa.
 
 ![Evolução do caminho](resultados/caminho_evolucao.png)
 
@@ -106,5 +106,5 @@ Como os carros são sorteados a cada partida, não existe um único caminho óti
 
 ## Limitações
 
-- O estado é "míope": não vê carros nas laterais nem a duas casas de distância, o que explica o ~1% de falhas restante.
+- O estado é "míope": não vê carros nas laterais nem a duas casas de distância, o que explica as falhas que ainda aparecem em alguns checkpoints.
 - A tabela Q só é viável porque o estado é pequeno; problemas maiores exigiriam aproximação de função (ex.: Deep Q-Learning).
